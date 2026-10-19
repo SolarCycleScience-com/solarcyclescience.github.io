@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Surface Flows  —  Solar Cycle Science</title>
+<meta content="Discover the dynamics of the Sun's surface flows: convective motions (granules and supergranules), differential rotation, and meridional circulation." name="description"/>
+<link href="bin/sun.ico" rel="icon"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;800&amp;family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&amp;display=swap" rel="stylesheet"/>
+<link href="solarcyclescience.css" rel="stylesheet"/>
+<style>
+    .flows-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 3rem;
+      align-items: start;
+      margin-top: 2rem;
+    }
+    .flows-grid--reverse {
+      grid-template-columns: 1fr 1.2fr;
+    }
+    @media (max-width: 900px) {
+      .flows-grid,
+      .flows-grid--reverse {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<!-- ── NAVIGATION ── -->
+<header>
+<nav aria-label="Main navigation" class="site-nav" role="navigation">
+<div class="nav-inner">
+<!-- Logo -->
+<a aria-label="Solar Cycle Science — Home" class="nav-logo" href="index.html" style="display:flex;align-items:center;gap:14px;text-decoration:none;">
+<img alt="Solar Cycle Science logo" aria-hidden="true" height="60" src="bin/BlueSun_small.jpg" style="flex-shrink:0;border-radius:50%;display:block;border:1.5px solid rgba(255, 154, 31, 0.35);box-shadow: 0 0 12px rgba(255, 154, 31, 0.25);" width="60"/>
+<span style="display:flex;flex-direction:column;gap:2px;">
+<span style="font-family:'Outfit',system-ui,sans-serif;font-weight:800;font-size:1.45rem;letter-spacing:0.02em;color:#FFD166;line-height:1.1;">Solar<span style="color:#FF9A1F;">Cycle</span>Science</span>
+<span style="font-family:'DM Sans',system-ui,sans-serif;font-size:0.78rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#3FA9F5;line-height:1;">Discover the Sun!</span>
+</span>
+</a>
+<!-- Desktop links -->
+<ul class="nav-links" id="nav-links">
+<li><a href="index.html">Home</a></li>
+<li><a href="basics.html">Basics</a></li>
+<li class="nav-dropdown" id="dropdown-science">
+<button aria-expanded="false" aria-haspopup="true" class="nav-dropdown-toggle">Science <span aria-hidden="true" class="chevron"></span></button>
+<ul class="nav-dropdown-menu" role="menu">
+<li role="menuitem"><a href="activeregions.html"><span class="nav-dot nav-dot--flare"></span>Active Regions</a></li>
+<li role="menuitem"><a href="flows.html"><span class="nav-dot nav-dot--blue"></span>Surface Flows</a></li>
+<li role="menuitem"><a href="giantcells.html"><span class="nav-dot nav-dot--blue"></span>Giant Cell Maps</a></li>
+<li role="menuitem"><a href="polarfields.html"><span class="nav-dot nav-dot--corona"></span>Polar Fields</a></li>
+<li role="menuitem"><a href="solarcycle.html"><span class="nav-dot nav-dot--gold"></span>Solar Cycles</a></li>
+<li role="menuitem"><a href="aft.html"><span class="nav-dot nav-dot--gold"></span>Advective Flux Transport</a></li>
+<li role="menuitem"><a href="baseline.html"><span class="nav-dot nav-dot--gold"></span>Baseline Maps</a></li>
+</ul>
+</li>
+<li><a href="forecasts.html">Predictions</a></li>
+<li><a href="media.html">Media</a></li>
+<li class="nav-dropdown" id="dropdown-about">
+<button aria-expanded="false" aria-haspopup="true" class="nav-dropdown-toggle">About <span aria-hidden="true" class="chevron"></span></button>
+<ul class="nav-dropdown-menu" role="menu">
+<li role="menuitem"><a href="people.html"><span class="nav-dot nav-dot--corona"></span>People</a></li>
+<li role="menuitem"><a href="more.html"><span class="nav-dot nav-dot--gold"></span>More Info</a></li>
+</ul>
+</li>
+<li><a class="nav-cta" href="forecasts.html">Latest Forecasts</a></li>
+</ul>
+<!-- ── Hamburger ── -->
+<button aria-expanded="false" aria-label="Toggle menu" class="nav-hamburger" id="nav-hamburger">
+<span></span><span></span><span></span>
+</button>
+</div>
+</nav>
+<!-- Mobile slide-out menu -->
+<nav aria-label="Mobile navigation" class="nav-mobile-overlay" id="nav-mobile">
+<span class="mobile-section-label">Main</span>
+<a class="mobile-nav-item" href="index.html">Home</a>
+<a class="mobile-nav-item" href="basics.html">Basics</a>
+<a class="mobile-nav-item" href="forecasts.html">Predictions</a>
+<a class="mobile-nav-item" href="media.html">Media</a>
+<hr class="mobile-divider"/>
+<span class="mobile-section-label">Science Topics</span>
+<a class="mobile-nav-item" href="activeregions.html"><span class="nav-dot nav-dot--flare"></span> Active Regions</a>
+<a class="mobile-nav-item" href="flows.html"><span class="nav-dot nav-dot--blue"></span> Surface Flows</a>
+<a class="mobile-nav-item" href="giantcells.html"><span class="nav-dot nav-dot--blue"></span> Giant Cell Maps</a>
+<a class="mobile-nav-item" href="polarfields.html"><span class="nav-dot nav-dot--corona"></span> Polar Fields</a>
+<a class="mobile-nav-item" href="solarcycle.html"><span class="nav-dot nav-dot--gold"></span> Solar Cycles</a>
+<a class="mobile-nav-item" href="aft.html"><span class="nav-dot nav-dot--gold"></span> Advective Flux Transport</a>
+<a class="mobile-nav-item" href="baseline.html"><span class="nav-dot nav-dot--gold"></span> Baseline Maps</a>
+<hr class="mobile-divider"/>
+<span class="mobile-section-label">About</span>
+<a class="mobile-nav-item" href="people.html">People</a>
+<a class="mobile-nav-item" href="more.html">More Info</a>
+</nav>
+</header>
+<main>
+<!-- ── INTRO ── -->
+<section class="section" style="padding-bottom: 0;">
+<div class="container">
+<p class="eyebrow">Solar Dynamics</p>
+<h1>Surface Flows</h1>
+<p class="lead">
+        The transport of magnetic flux on the Sun's surface is driven by three key flow modes: convective flows, differential rotation, and meridional circulation.
+      </p>
+<div class="card" style="margin-top: 2rem;">
+<p style="margin: 0;">
+          While differential rotation and meridional flow are large-scale, Axisymmetric motions (east-west and north-south respectively), convective supergranular flows act as a turbulent diffusion mechanism on multiple spatial scales. Together, these currents reshape the solar magnetic field and guide the cycle.
+        </p>
+</div>
+</div>
+</section>
+<!-- Convection Section -->
+<section class="section">
+<div class="container">
+<hr class="divider" style="margin-top: 0; margin-bottom: 3rem;"/>
+<h2 id="convection">Solar Convection</h2>
+<div class="flows-grid reveal-group">
+<div>
+<p>
+            Convection zone thermal gradients drive plasma in a boiling motion spanning multiple spatial scales:
+          </p>
+<ul>
+<li style="margin-bottom: 0.6rem;"><strong>Granules:</strong> Small-scale cells (~1,000 km diameter) with fast velocities (~3,000 m/s) and short lifetimes (~10 mins), bridging convective heat transport and atmospheric cooling.</li>
+<li style="margin-bottom: 0.6rem;"><strong>Supergranules:</strong> Mesoscale cells (~30,000 km diameter) with ~500 m/s flows, surviving for about a day. Discovered by Doppler mapping, they sweep magnetic elements to their boundaries, forming the solar magnetic network.</li>
+<li style="margin-bottom: 0.6rem;"><strong>Giant Cells:</strong> Massive interior-spanning structures (~200,000 km diameter) with weak velocities (~10 m/s) and months-long lifetimes. These transport angular momentum to drive differential rotation.</li>
+</ul>
+<p>
+            Acoustic waves generated by convection bounce through the solar interior. analyzing these sound waves — a discipline known as <strong>helioseismology</strong> — unveiled the cellular structures of supergranulation hidden underneath the photospheric surface.
+          </p>
+</div>
+<div>
+<div class="card card--blue">
+<div class="img-frame">
+<img alt="Different scales of solar convection cells" src="bin/Convection.png"/>
+</div>
+<p class="caption" style="margin-top: 12px; margin-bottom: 0;">
+<strong>Convective Scale Comparisons:</strong> Schematic showing relative sizes and lifetimes of Granules, Supergranules, and Giant Cells.
+            </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Differential Rotation Section -->
+<section class="section" style="background: #080D1C; border-top: 1px solid rgba(255,154,31,0.08); border-bottom: 1px solid rgba(255,154,31,0.08);">
+<div class="container">
+<h2 id="dr">Differential Rotation</h2>
+<div class="flows-grid flows-grid--reverse reveal-group">
+<div>
+<div class="card">
+<div class="img-frame">
+<img alt="Surface differential rotation visualization" src="bin/DR.png"/>
+</div>
+<p class="caption" style="margin-top: 12px; margin-bottom: 0;">
+<strong>Stellar Rotation:</strong> The Sun does not rotate as a solid body. The equator completes a rotation in ~25 days, whereas the high polar latitudes take up to 36 days.
+            </p>
+</div>
+</div>
+<div>
+<p>
+            First noticed by Christoph Scheiner in 1610 via sunspot tracking, the Sun's rotation rate depends heavily on latitude. Richard Carrington quantified this synodic rotation as averaging 27.2753 days (the Carrington Rotation).
+          </p>
+<p>
+            Subtracting the average rotation profile from Doppler observations reveals a residual flow pattern called <strong>Torsional Oscillations</strong>: chevron-shaped east-west flow bands that migrate equatorward over the 11-year cycle.
+          </p>
+<p>
+            Helioseismology has mapped this deep into the convection zone, showing that the differential rotation persists down to ~0.7 R<sub>☉</sub>. at this boundary (the <strong>tachocline</strong>), it transitions to solid-body rotation in the radiative interior.
+          </p>
+          <div style="margin-top: 2rem;">
+            <a class="btn btn-secondary" href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/7RLWAE" rel="noopener noreferrer" target="_blank">Access Rotation &amp; Torsional Oscillation Data  ↗</a>
+          </div>
+</div>
+</div>
+<div class="card card--blue" style="margin-top: 2.5rem;">
+<div class="img-frame">
+<img alt="Differential Rotation History and Torsional Oscillations Chevron Map" src="bin/DifferentialRotationHistory2Panel.png"/>
+</div>
+<p class="caption" style="margin-top: 12px; margin-bottom: 0;">
+<strong>Torsional Oscillations:</strong> Top panel displays differential rotation history. Bottom panel displays residual east-west flow bands (red for fast eastward flow, blue for slow westward flow) showing the equatorward chevrons synchronizing with sunspot bands (black dots).
+        </p>
+</div>
+</div>
+</section>
+<!-- Meridional Flow Section -->
+<section class="section">
+<div class="container">
+<h2 id="mf">Meridional Circulation</h2>
+<div class="flows-grid reveal-group">
+<div>
+<p>
+            Meridional circulation is a weak (~10–20 m/s) flow directing plasma poleward at the surface, with sinking motions at the poles and rising currents at the equator. 
+          </p>
+<p>
+            First hypothesized by Babcock (1961) and Leighton (1964) as a driver of polar field reversals, it was directly measured in 1982. Observations show that this meridional return flow occurs around 60 Mm depth — a shallow layer that has shifted prior paradigms assuming returns at the tachocline.
+          </p>
+<p>
+            This meridional flow slows down in active sunspot latitudes, creating cycles of magnetic flux accumulation that directly influence solar prediction models.
+          </p>
+</div>
+<div>
+<div class="card">
+<div class="img-frame">
+<img alt="Interior Meridional Circulation Diagram" src="bin/SolarInteriorCirculationLabeled.jpg"/>
+</div>
+<p class="caption" style="margin-top: 12px; margin-bottom: 0;">
+<strong>Meridional Conveyor Belt:</strong> Sinking motions occur at the poles, with the return flow traveling equatorward about 60 Mm below the surface.
+            </p>
+</div>
+</div>
+</div>
+<div class="card card--blue" style="margin-top: 2.5rem;">
+<div class="img-frame">
+<img alt="Meridional Flow History and Residuals Map" src="bin/MeridionalFlowHistory2Panel.png"/>
+</div>
+<p class="caption" style="margin-top: 12px; margin-bottom: 0;">
+<strong>Meridional Flow History:</strong> Top panel shows total north-south meridional circulation. Bottom panel shows residual flow variations over time. Blue represents southward flow and red represents northward flow, with sunspot latitudes marked in black.
+        </p>
+</div>
+</div>
+</section>
+</main>
+<!-- ── FOOTER ── -->
+<footer class="site-footer">
+<div class="footer-inner">
+<div>
+<a class="footer-brand-logo" href="index.html">
+<img alt="Solar Cycle Science" src="bin/BlueSun_small.jpg"/>
+<span>Solar<em>Cycle</em>Science</span>
+</a>
+<p class="footer-tagline">
+        Exploring the dynamic Sun — solar cycles, magnetic fields, surface flows,
+        and forecasts. Maintained by solar physicists Dr. Lisa Upton, Dr. David Hathaway, and Dr. Bibhuti Kumar Jha.
+      </p>
+<p class="footer-support">
+        Supported by grants from NASA and NSF, including a NASA grant to support the
+        <a href="https://COFFIES.stanford.edu" rel="noopener noreferrer" target="_blank">COFFIES DRIVE Center</a>.
+      </p>
+</div>
+<div class="footer-col">
+<h5>Learn</h5>
+<ul>
+<li><a href="basics.html">The Basics</a></li>
+<li><a href="solarcycle.html">Solar Cycles</a></li>
+<li><a href="activeregions.html">Active Regions</a></li>
+<li><a href="polarfields.html">Polar Fields</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h5>Research</h5>
+<ul>
+<li><a href="flows.html">Surface Flows</a></li>
+<li><a href="giantcells.html">Giant Cell Maps</a></li>
+<li><a href="aft.html">Advective Flux Transport</a></li>
+<li><a href="baseline.html">Baseline Maps</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h5>More</h5>
+<ul>
+<li><a href="forecasts.html">Predictions</a></li>
+<li><a href="media.html">Media</a></li>
+<li><a href="people.html">People</a></li>
+<li><a href="more.html">More Info</a></li>
+<li><a href="https://COFFIES.stanford.edu" rel="noopener noreferrer" target="_blank">COFFIES Center ↗</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">
+<span>&emsp;© SolarCycleScience.com 2026</span>
+</div>
+</footer>
+<!-- ── JAVASCRIPT ── -->
+<script>
+(function () {
+  'use strict';
+  /* active link */
+  const path = window.location.pathname.replace(/\/$/, '') || '/index.html';
+  document.querySelectorAll('.nav-links a, .mobile-nav-item').forEach(link => {
+    const href = (link.getAttribute('href') || '').replace(/\/$/, '');
+    if (path.endsWith(href) || (path === '/' && href === '/index.html')) {
+      link.classList.add('active');
+    }
+  });
+  /* Hamburger */
+  const burger = document.getElementById('nav-hamburger');
+  const mobileNav = document.getElementById('nav-mobile');
+  if (burger && mobileNav) {
+    burger.addEventListener('click', () => {
+      const open = burger.classList.toggle('open');
+      mobileNav.classList.toggle('open', open);
+      burger.setAttribute('aria-expanded', String(open));
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+    mobileNav.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        burger.classList.remove('open');
+        mobileNav.classList.remove('open');
+        burger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+  }
+  /* Dropdowns */
+  document.querySelectorAll('.nav-dropdown').forEach(dd => {
+    const toggle = dd.querySelector('.nav-dropdown-toggle');
+    if (!toggle) return;
+    toggle.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const open = dd.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', String(open));
+      }
+      if (e.key === 'Escape') {
+        dd.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.focus();
+      }
+    });
+    document.addEventListener('click', e => {
+      if (!dd.contains(e.target)) {
+        dd.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+  /* Scroll reveal */
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal, .reveal-group').forEach(el => obs.observe(el));
+  /* Nav border on scroll */
+  const nav = document.querySelector('.site-nav');
+  if (nav) {
+    window.addEventListener('scroll', () => {
+      nav.style.borderBottomColor = window.scrollY > 10
+        ? 'rgba(255,154,31,0.28)' : 'rgba(255,154,31,0.14)';
+    }, { passive: true });
+  }
+})();
+</script>
+</body>
+</html>

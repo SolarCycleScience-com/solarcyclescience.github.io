@@ -1,0 +1,390 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Solar Predictions &amp; Forecasts  —  Solar Cycle Science</title>
+<meta content="View the latest solar cycle forecasts and sunspot number predictions, F10.7 radio flux, and polar field precursor data." name="description"/>
+<link href="bin/sun.ico" rel="icon"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;800&amp;family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&amp;display=swap" rel="stylesheet"/>
+<link href="solarcyclescience.css" rel="stylesheet"/>
+<style>
+    .forecast-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 3rem;
+      align-items: start;
+      margin-top: 2rem;
+    }
+    .forecast-grid--reverse {
+      grid-template-columns: 1fr 1.2fr;
+    }
+    @media (max-width: 900px) {
+      .forecast-grid,
+      .forecast-grid--reverse {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+    .precursor-flex {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    @media (max-width: 600px) {
+      .precursor-flex {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+<!-- ── NAVIGATION ── -->
+<header>
+<nav aria-label="Main navigation" class="site-nav" role="navigation">
+<div class="nav-inner">
+<!-- Logo -->
+<a aria-label="Solar Cycle Science — Home" class="nav-logo" href="index.html" style="display:flex;align-items:center;gap:14px;text-decoration:none;">
+<img alt="Solar Cycle Science logo" aria-hidden="true" height="60" src="bin/BlueSun_small.jpg" style="flex-shrink:0;border-radius:50%;display:block;border:1.5px solid rgba(255, 154, 31, 0.35);box-shadow: 0 0 12px rgba(255, 154, 31, 0.25);" width="60"/>
+<span style="display:flex;flex-direction:column;gap:2px;">
+<span style="font-family:'Outfit',system-ui,sans-serif;font-weight:800;font-size:1.45rem;letter-spacing:0.02em;color:#FFD166;line-height:1.1;">Solar<span style="color:#FF9A1F;">Cycle</span>Science</span>
+<span style="font-family:'DM Sans',system-ui,sans-serif;font-size:0.78rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#3FA9F5;line-height:1;">Discover the Sun!</span>
+</span>
+</a>
+<!-- Desktop links -->
+<ul class="nav-links" id="nav-links">
+<li><a href="index.html">Home</a></li>
+<li><a href="basics.html">Basics</a></li>
+<li class="nav-dropdown" id="dropdown-science">
+<button aria-expanded="false" aria-haspopup="true" class="nav-dropdown-toggle">Science <span aria-hidden="true" class="chevron"></span></button>
+<ul class="nav-dropdown-menu" role="menu">
+<li role="menuitem"><a href="activeregions.html"><span class="nav-dot nav-dot--flare"></span>Active Regions</a></li>
+<li role="menuitem"><a href="flows.html"><span class="nav-dot nav-dot--blue"></span>Surface Flows</a></li>
+<li role="menuitem"><a href="giantcells.html"><span class="nav-dot nav-dot--blue"></span>Giant Cell Maps</a></li>
+<li role="menuitem"><a href="polarfields.html"><span class="nav-dot nav-dot--corona"></span>Polar Fields</a></li>
+<li role="menuitem"><a href="solarcycle.html"><span class="nav-dot nav-dot--gold"></span>Solar Cycles</a></li>
+<li role="menuitem"><a href="aft.html"><span class="nav-dot nav-dot--gold"></span>Advective Flux Transport</a></li>
+<li role="menuitem"><a href="baseline.html"><span class="nav-dot nav-dot--gold"></span>Baseline Maps</a></li>
+</ul>
+</li>
+<li><a href="forecasts.html">Predictions</a></li>
+<li><a href="media.html">Media</a></li>
+<li class="nav-dropdown" id="dropdown-about">
+<button aria-expanded="false" aria-haspopup="true" class="nav-dropdown-toggle">About <span aria-hidden="true" class="chevron"></span></button>
+<ul class="nav-dropdown-menu" role="menu">
+<li role="menuitem"><a href="people.html"><span class="nav-dot nav-dot--corona"></span>People</a></li>
+<li role="menuitem"><a href="more.html"><span class="nav-dot nav-dot--gold"></span>More Info</a></li>
+</ul>
+</li>
+<li><a class="nav-cta" href="forecasts.html">Latest Forecasts</a></li>
+</ul>
+<!-- ── Hamburger ── -->
+<button aria-expanded="false" aria-label="Toggle menu" class="nav-hamburger" id="nav-hamburger">
+<span></span><span></span><span></span>
+</button>
+</div>
+</nav>
+<!-- Mobile slide-out menu -->
+<nav aria-label="Mobile navigation" class="nav-mobile-overlay" id="nav-mobile">
+<span class="mobile-section-label">Main</span>
+<a class="mobile-nav-item" href="index.html">Home</a>
+<a class="mobile-nav-item" href="basics.html">Basics</a>
+<a class="mobile-nav-item" href="forecasts.html">Predictions</a>
+<a class="mobile-nav-item" href="media.html">Media</a>
+<hr class="mobile-divider"/>
+<span class="mobile-section-label">Science Topics</span>
+<a class="mobile-nav-item" href="activeregions.html"><span class="nav-dot nav-dot--flare"></span> Active Regions</a>
+<a class="mobile-nav-item" href="flows.html"><span class="nav-dot nav-dot--blue"></span> Surface Flows</a>
+<a class="mobile-nav-item" href="giantcells.html"><span class="nav-dot nav-dot--blue"></span> Giant Cell Maps</a>
+<a class="mobile-nav-item" href="polarfields.html"><span class="nav-dot nav-dot--corona"></span> Polar Fields</a>
+<a class="mobile-nav-item" href="solarcycle.html"><span class="nav-dot nav-dot--gold"></span> Solar Cycles</a>
+<a class="mobile-nav-item" href="aft.html"><span class="nav-dot nav-dot--gold"></span> Advective Flux Transport</a>
+<a class="mobile-nav-item" href="baseline.html"><span class="nav-dot nav-dot--gold"></span> Baseline Maps</a>
+<hr class="mobile-divider"/>
+<span class="mobile-section-label">About</span>
+<a class="mobile-nav-item" href="people.html">People</a>
+<a class="mobile-nav-item" href="more.html">More Info</a>
+</nav>
+</header>
+<main>
+<!-- ── INTRO ── -->
+<section class="section" style="padding-bottom: 0;">
+<div class="container">
+<p class="eyebrow">Cycle 25 Space Weather</p>
+<h1>Solar Cycle Predictions</h1>
+<p class="lead">
+        Tracking the progress and decline of Solar Cycle 25 using curve-fitting and physical precursor methods.
+      </p>
+<div class="card card--blue reveal-group" style="margin-top: 2rem;">
+<p style="margin: 0;">
+          The maximum of Solar Cycle 25 has been established at a smoothed sunspot number of <strong>160.8</strong> in October 2024. Now that we are years into the cycle, curve-fitting models have become highly reliable, backed by precursor methods such as geomagnetic activity indices and polar magnetic field strengths at solar minimum.
+        </p>
+</div>
+</div>
+</section>
+<!-- Cycle 25 Forecasts -->
+<section class="section">
+<div class="container">
+<hr class="divider" style="margin-top: 0; margin-bottom: 3rem;"/>
+<h2 id="cycle25">Sunspot Number Prediction</h2>
+<div class="reveal-group">
+<div style="max-width: var(--content-width); margin-bottom: 2rem;">
+<p>
+            Our curve-fitting method, anchored by papers from Hathaway, Wilson, and Reichmann (1994, 1999), indicates that Cycle 25 is larger than Cycle 24 but remains smaller than Cycle 23, making it a relatively average-sized cycle. 
+          </p>
+<p>
+            This is in excellent agreement with both polar field and geomagnetic precursors (detailed below).
+          </p>
+<div class="btn-row" style="margin-top: 1.5rem; display: flex; gap: 10px;">
+<a class="btn btn-secondary" href="bin/predictSSN.txt">Prediction Data Table (.txt)</a>
+<a class="btn btn-ghost" href="bin/PredictSSN_alt.png" rel="noopener noreferrer" target="_blank">alternative Background Plot (.png) ↗</a>
+</div>
+</div>
+<div class="card" style="margin-top: 2rem;">
+<div class="img-frame" style="max-height: 580px; display: flex; align-items: center; justify-content: center; background: #04060F;">
+<img alt="Sunspot Number Prediction Plot for Cycles 23, 24, and 25" src="bin/PredictSSN_23_24_25.png" style="max-height: 580px; width: 100%; object-fit: contain;"/>
+</div>
+<p class="caption" style="margin-top: 12px; margin-bottom: 0; text-align: center;">
+<strong>Sunspot Prediction:</strong> Plot showing observed sunspot numbers and the curve-fitted predictions for Cycle 25.
+          </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Precursor Methods -->
+<section class="section" style="background: #080D1C; border-top: 1px solid rgba(255,154,31,0.08); border-bottom: 1px solid rgba(255,154,31,0.08);">
+<div class="container">
+<h2>Precursor Forecasting Methods</h2>
+<p style="margin-bottom: 2.5rem;">
+        Physically-grounded precursors measured during solar minimum offer the earliest and most robust predictions.
+      </p>
+<div class="forecast-grid reveal-group">
+<div>
+<h3 style="color: var(--gold);">1. Polar Fields Precursor</h3>
+<p>
+            The Sun's polar field strength at minimum is the most reliable precursor for the following cycle's peak. Data from the <strong>Wilcox Solar Observatory (WSO)</strong> indicates a maximum sunspot number of <strong>120</strong> for Cycle 25, based on the polar fields measured in December 2019.
+          </p>
+<div class="precursor-flex">
+<div class="card">
+<div class="img-frame"><img alt="WSO Polar Fields SSN correlation" src="bin/WSO_PolarFieldsSSN.png"/></div>
+</div>
+<div class="card">
+<div class="img-frame"><img alt="WSO Polar Fields Precursor plot" src="bin/WSO_PolarFieldsPrecursor.png"/></div>
+</div>
+</div>
+</div>
+<div>
+<h3 style="color: var(--gold);">2. Geomagnetic aa-Index Precursor</h3>
+<p>
+            Geomagnetic activity near cycle minimum (first observed by Ohl in 1966) correlates strongly with cycle amplitude. The minimum in the geomagnetic <em>aa</em>-index around the Cycle 24/25 minimum indicates a maximum sunspot number of <strong>132</strong> for Cycle 25.
+          </p>
+<div class="precursor-flex">
+<div class="card">
+<div class="img-frame"><img alt="SSN vs aa index minima" src="bin/SSN_aa_Minima.png"/></div>
+</div>
+<div class="card">
+<div class="img-frame"><img alt="aa index precursor plot" src="bin/aaIndexPrecursor.png"/></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- F10.7 Flux -->
+<section class="section">
+<div class="container">
+<h2 id="f107">F10.7 Radio Flux Prediction</h2>
+<div class="forecast-grid reveal-group">
+<div>
+<p>
+            The solar radio flux at 10.7 cm wavelength (2.8 GHz) is a key metric for upper atmosphere density and satellite drag calculations, following solar ultraviolet changes closer than sunspot counts.
+          </p>
+<p>
+            AFT and curve-fitting models predict F10.7 radio flux through the decline of Cycle 25.
+          </p>
+<div class="card" style="margin-top: 1.5rem;">
+<h4 style="color: var(--corona); margin-bottom: 0.5rem;">F10.7 Files</h4>
+<div class="chip-row">
+<a class="chip" href="bin/predictF107.txt">F10.7 Prediction Data (.txt)</a>
+<a class="chip chip--blue" href="https://ftp.seismo.nrcan.gc.ca/spaceweather/solar_flux/daily_flux_values/fluxtable.txt" rel="noopener noreferrer" target="_blank">Daily Observed Flux Table (NRC)  ↗ </a>
+</div>
+</div>
+</div>
+<div>
+<div class="card card--blue">
+<div class="img-frame">
+<img alt="F10.7 Radio Flux Prediction Plot" src="bin/predictF107.png"/>
+</div>
+<p class="caption" style="margin-top: 10px; margin-bottom: 0;">
+<strong>F10.7 Flux Forecast:</strong> Predictions for Solar Cycles 24 and 25 radio flux compared to observations.
+            </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Historical Predictions Performance -->
+<section class="section" style="background: #080D1C; border-top: 1px solid rgba(255,154,31,0.08);">
+<div class="container">
+<h2>Historical Performance: Cycles 24 &amp; 25</h2>
+<div class="forecast-grid reveal-group" style="margin-top: 2rem;">
+<div>
+<h3 style="color: var(--gold);">Cycle 24 Polar Predictions</h3>
+<p>
+            In 2016, we utilized our AFT model to project the polar field buildup at the 2020 minimum. 32 realizations incorporating stochastic variations in convection and Joy's Law tilt correctly predicted that the Cycle 24/25 minimum would feature polar strengths similar to the previous cycle.
+          </p>
+<div class="card">
+<div class="img-frame">
+<img alt="Solar Cycle 24 Polar Field Predictions" src="Predictions/Cycle24_PolarField_Prediction.png"/>
+</div>
+<p class="caption" style="margin-top: 10px; margin-bottom: 0;">
+<strong>2016 Model Ensemble:</strong> Variations in convection profiles (left) and Joy's Law tilt (right) showing high consistency in polar predictions.
+            </p>
+</div>
+</div>
+<div>
+<h3 style="color: var(--gold);">2018 Performance Review</h3>
+<p>
+            In 2019, we updated our AFT simulations. Subsequent observations tracked in red (both polar fields above 55° and axial dipole moment) stayed in close alignment with the dark blue AFT prediction envelopes.
+          </p>
+<div class="card">
+<div class="img-frame">
+<img alt="AFT 2018 predictions vs observations" src="bin/2019PolarFieldPrediction.png"/>
+</div>
+<p class="caption" style="margin-top: 10px; margin-bottom: 0;">
+<strong>Observed vs Simulated (2018):</strong> Comparison plotting actual polar field observations (red) against model runs.
+            </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- ── FOOTER ── -->
+<footer class="site-footer">
+<div class="footer-inner">
+<div>
+<a class="footer-brand-logo" href="index.html">
+<img alt="Solar Cycle Science" src="bin/BlueSun_small.jpg"/>
+<span>Solar<em>Cycle</em>Science</span>
+</a>
+<p class="footer-tagline">
+        Exploring the dynamic Sun — solar cycles, magnetic fields, surface flows,
+        and forecasts. Maintained by solar physicists Dr. Lisa Upton, Dr. David Hathaway, and Dr. Bibhuti Kumar Jha.
+      </p>
+<p class="footer-support">
+        Supported by grants from NASA and NSF, including a NASA grant to support the
+        <a href="https://COFFIES.stanford.edu" rel="noopener noreferrer" target="_blank">COFFIES DRIVE Center</a>.
+      </p>
+</div>
+<div class="footer-col">
+<h5>Learn</h5>
+<ul>
+<li><a href="basics.html">The Basics</a></li>
+<li><a href="solarcycle.html">Solar Cycles</a></li>
+<li><a href="activeregions.html">Active Regions</a></li>
+<li><a href="polarfields.html">Polar Fields</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h5>Research</h5>
+<ul>
+<li><a href="flows.html">Surface Flows</a></li>
+<li><a href="giantcells.html">Giant Cell Maps</a></li>
+<li><a href="aft.html">Advective Flux Transport</a></li>
+<li><a href="baseline.html">Baseline Maps</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h5>More</h5>
+<ul>
+<li><a href="forecasts.html">Predictions</a></li>
+<li><a href="media.html">Media</a></li>
+<li><a href="people.html">People</a></li>
+<li><a href="more.html">More Info</a></li>
+<li><a href="https://COFFIES.stanford.edu" rel="noopener noreferrer" target="_blank">COFFIES Center ↗</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">
+<span>&emsp;© SolarCycleScience.com 2026</span>
+</div>
+</footer>
+<!-- ── JAVASCRIPT ── -->
+<script>
+(function () {
+  'use strict';
+  /* active link */
+  const path = window.location.pathname.replace(/\/$/, '') || '/index.html';
+  document.querySelectorAll('.nav-links a, .mobile-nav-item').forEach(link => {
+    const href = (link.getAttribute('href') || '').replace(/\/$/, '');
+    if (path.endsWith(href) || (path === '/' && href === '/index.html')) {
+      link.classList.add('active');
+    }
+  });
+  /* Hamburger */
+  const burger = document.getElementById('nav-hamburger');
+  const mobileNav = document.getElementById('nav-mobile');
+  if (burger && mobileNav) {
+    burger.addEventListener('click', () => {
+      const open = burger.classList.toggle('open');
+      mobileNav.classList.toggle('open', open);
+      burger.setAttribute('aria-expanded', String(open));
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+    mobileNav.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        burger.classList.remove('open');
+        mobileNav.classList.remove('open');
+        burger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+  }
+  /* Dropdowns */
+  document.querySelectorAll('.nav-dropdown').forEach(dd => {
+    const toggle = dd.querySelector('.nav-dropdown-toggle');
+    if (!toggle) return;
+    toggle.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const open = dd.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', String(open));
+      }
+      if (e.key === 'Escape') {
+        dd.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.focus();
+      }
+    });
+    document.addEventListener('click', e => {
+      if (!dd.contains(e.target)) {
+        dd.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+  /* Scroll reveal */
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal, .reveal-group').forEach(el => obs.observe(el));
+  /* Nav border on scroll */
+  const nav = document.querySelector('.site-nav');
+  if (nav) {
+    window.addEventListener('scroll', () => {
+      nav.style.borderBottomColor = window.scrollY > 10
+        ? 'rgba(255,154,31,0.28)' : 'rgba(255,154,31,0.14)';
+    }, { passive: true });
+  }
+})();
+</script>
+</body>
+</html>

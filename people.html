@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Our People  —  Solar Cycle Science</title>
+<meta content="Meet the solar physicists behind Solar Cycle Science: Dr. Lisa Upton, Dr. David Hathaway, and Dr. Bibhuti Kumar Jha." name="description"/>
+<link href="bin/sun.ico" rel="icon"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;800&amp;family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&amp;display=swap" rel="stylesheet"/>
+<link href="solarcyclescience.css" rel="stylesheet"/>
+<style>
+    .bio-card {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 2.5rem;
+      align-items: start;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      margin-bottom: 2rem;
+    }
+    .bio-photo {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--border-hover);
+    }
+    .bio-photo img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      display: block;
+    }
+    @media (max-width: 768px) {
+      .bio-card {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 1.5rem;
+      }
+      .bio-photo {
+        max-width: 200px;
+        margin-inline: auto;
+      }
+    }
+    .paper-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .paper-item {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      transition: all 0.28s ease;
+    }
+    .paper-item:hover {
+      border-color: var(--border-hover);
+      background: var(--bg-raised);
+    }
+  </style>
+</head>
+<body>
+<!-- ── NAVIGATION ── -->
+<header>
+<nav aria-label="Main navigation" class="site-nav" role="navigation">
+<div class="nav-inner">
+<!-- Logo -->
+<a aria-label="Solar Cycle Science — Home" class="nav-logo" href="index.html" style="display:flex;align-items:center;gap:14px;text-decoration:none;">
+<img alt="Solar Cycle Science logo" aria-hidden="true" height="60" src="bin/BlueSun_small.jpg" style="flex-shrink:0;border-radius:50%;display:block;border:1.5px solid rgba(255, 154, 31, 0.35);box-shadow: 0 0 12px rgba(255, 154, 31, 0.25);" width="60"/>
+<span style="display:flex;flex-direction:column;gap:2px;">
+<span style="font-family:'Outfit',system-ui,sans-serif;font-weight:800;font-size:1.45rem;letter-spacing:0.02em;color:#FFD166;line-height:1.1;">Solar<span style="color:#FF9A1F;">Cycle</span>Science</span>
+<span style="font-family:'DM Sans',system-ui,sans-serif;font-size:0.78rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#3FA9F5;line-height:1;">Discover the Sun!</span>
+</span>
+</a>
+<!-- Desktop links -->
+<ul class="nav-links" id="nav-links">
+<li><a href="index.html">Home</a></li>
+<li><a href="basics.html">Basics</a></li>
+<li class="nav-dropdown" id="dropdown-science">
+<button aria-expanded="false" aria-haspopup="true" class="nav-dropdown-toggle">Science <span aria-hidden="true" class="chevron"></span></button>
+<ul class="nav-dropdown-menu" role="menu">
+<li role="menuitem"><a href="activeregions.html"><span class="nav-dot nav-dot--flare"></span>Active Regions</a></li>
+<li role="menuitem"><a href="flows.html"><span class="nav-dot nav-dot--blue"></span>Surface Flows</a></li>
+<li role="menuitem"><a href="giantcells.html"><span class="nav-dot nav-dot--blue"></span>Giant Cell Maps</a></li>
+<li role="menuitem"><a href="polarfields.html"><span class="nav-dot nav-dot--corona"></span>Polar Fields</a></li>
+<li role="menuitem"><a href="solarcycle.html"><span class="nav-dot nav-dot--gold"></span>Solar Cycles</a></li>
+<li role="menuitem"><a href="aft.html"><span class="nav-dot nav-dot--gold"></span>Advective Flux Transport</a></li>
+<li role="menuitem"><a href="baseline.html"><span class="nav-dot nav-dot--gold"></span>Baseline Maps</a></li>
+</ul>
+</li>
+<li><a href="forecasts.html">Predictions</a></li>
+<li><a href="media.html">Media</a></li>
+<li class="nav-dropdown" id="dropdown-about">
+<button aria-expanded="false" aria-haspopup="true" class="nav-dropdown-toggle">About <span aria-hidden="true" class="chevron"></span></button>
+<ul class="nav-dropdown-menu" role="menu">
+<li role="menuitem"><a href="people.html"><span class="nav-dot nav-dot--corona"></span>People</a></li>
+<li role="menuitem"><a href="more.html"><span class="nav-dot nav-dot--gold"></span>More Info</a></li>
+</ul>
+</li>
+<li><a class="nav-cta" href="forecasts.html">Latest Forecasts</a></li>
+</ul>
+<!-- ── Hamburger ── -->
+<button aria-expanded="false" aria-label="Toggle menu" class="nav-hamburger" id="nav-hamburger">
+<span></span><span></span><span></span>
+</button>
+</div>
+</nav>
+<!-- Mobile slide-out menu -->
+<nav aria-label="Mobile navigation" class="nav-mobile-overlay" id="nav-mobile">
+<span class="mobile-section-label">Main</span>
+<a class="mobile-nav-item" href="index.html">Home</a>
+<a class="mobile-nav-item" href="basics.html">Basics</a>
+<a class="mobile-nav-item" href="forecasts.html">Predictions</a>
+<a class="mobile-nav-item" href="media.html">Media</a>
+<hr class="mobile-divider"/>
+<span class="mobile-section-label">Science Topics</span>
+<a class="mobile-nav-item" href="activeregions.html"><span class="nav-dot nav-dot--flare"></span> Active Regions</a>
+<a class="mobile-nav-item" href="flows.html"><span class="nav-dot nav-dot--blue"></span> Surface Flows</a>
+<a class="mobile-nav-item" href="giantcells.html"><span class="nav-dot nav-dot--blue"></span> Giant Cell Maps</a>
+<a class="mobile-nav-item" href="polarfields.html"><span class="nav-dot nav-dot--corona"></span> Polar Fields</a>
+<a class="mobile-nav-item" href="solarcycle.html"><span class="nav-dot nav-dot--gold"></span> Solar Cycles</a>
+<a class="mobile-nav-item" href="aft.html"><span class="nav-dot nav-dot--gold"></span> Advective Flux Transport</a>
+<a class="mobile-nav-item" href="baseline.html"><span class="nav-dot nav-dot--gold"></span> Baseline Maps</a>
+<hr class="mobile-divider"/>
+<span class="mobile-section-label">About</span>
+<a class="mobile-nav-item" href="people.html">People</a>
+<a class="mobile-nav-item" href="more.html">More Info</a>
+</nav>
+</header>
+<main>
+<!-- ── INTRO ── -->
+<section class="section" style="padding-bottom: 0;">
+<div class="container">
+<p class="eyebrow">Heliophysicists</p>
+<h1>About Us</h1>
+<p class="lead">
+        We are solar physicists dedicated to studying active regions, surface transport currents, and predicting the solar cycle.
+      </p>
+<div class="card reveal-group" style="margin-top: 2rem;">
+<p style="margin: 0;">
+          Together, we developed the Advective Flux Transport (AFT) model. We created this website to share our data, models, and love of solar science with both the public and our colleagues.
+        </p>
+</div>
+</div>
+</section>
+<!-- Bios Section -->
+<section class="section">
+<div class="container">
+<hr class="divider" style="margin-top: 0; margin-bottom: 3rem;"/>
+<div class="reveal-group">
+<!-- Lisa Bio -->
+<div class="bio-card" id="Upton">
+<div class="bio-photo">
+<img alt="Dr. Lisa Upton" src="bin/Upton_2016.jpg"/>
+</div>
+<div>
+<h2 style="margin-bottom: 8px;">Dr. Lisa Upton</h2>
+<p class="eyebrow" style="margin-bottom: 12px; font-size: 0.65rem;">Lead Scientist</p>
+<p>
+              Dr. Upton began her solar physics career in 2006 analyzing coronal loops using data from SDO, TRaCE, and Hinode. She earned her Ph.D. in Physics from Vanderbilt University, writing her dissertation on magnetic flux transport and solar cycle modeling, during which she co-developed the AFT model with Dr. David Hathaway.
+            </p>
+<p>
+              She has served as a co-chair for the NASA/NOaa Solar Cycle 25 Prediction Panel. Her research goals target solar dynamo dynamics, space climate modeling, and bridging the solar interior with the atmosphere using SFT.
+            </p>
+<p style="font-size: 0.9rem; margin-bottom: 0.5rem;">
+<strong>Contact:</strong> <a href="mailto:lisa@solarcyclescience.com">lisa@solarcyclescience.com</a>
+</p>
+</div>
+</div>
+<!-- David Bio -->
+<div class="bio-card" id="Hathaway">
+<div class="bio-photo">
+<img alt="Dr. David Hathaway" src="bin/DavidHathaway2013.jpg"/>
+</div>
+<div>
+<h2 style="margin-bottom: 8px;">Dr. David Hathaway</h2>
+<p class="eyebrow" style="margin-bottom: 12px; font-size: 0.65rem;">NASA Solar Physicist (Retired)</p>
+<p>
+              Dr. Hathaway received his Ph.D. in astrophysics from the University of Colorado in 1979. He worked at the National Solar Observatory before moving to NASA's Marshall Space Flight Center, where he served as the head of the Solar Physics Branch from 1996 to 2010. He retired from NASA ames Research Center in 2016.
+            </p>
+<p>
+              Over a distinguished career, he has published over 200 papers and received the NASA Exceptional Scientific achievement Medal in 2014 for discovering the Sun's shallow meridional return flow and giant convection cells. He was also awarded the NASA Inventor of the Year award in 2002 for inventing VISaR image registration technology.
+            </p>
+<p style="font-size: 0.9rem; margin-bottom: 0;">
+<strong>Contact:</strong> <a href="mailto:dave.hathaway@comcast.net">dave.hathaway@comcast.net</a>
+</p>
+</div>
+</div>
+<!-- Bibhuti Bio -->
+<div class="bio-card" id="Jha">
+<div class="bio-photo">
+<img alt="Dr. Bibhuti Kumar Jha" src="bin/BKJha.jpg"/>
+</div>
+<div>
+<h2 style="margin-bottom: 8px;">Dr. Bibhuti Kumar Jha</h2>
+<p class="eyebrow" style="margin-bottom: 12px; font-size: 0.65rem;">Postdoctoral Researcher</p>
+<p>
+              Dr. Jha received his Ph.D. in solar astrophysics from the Indian Institute of astrophysics (IIa) in Nainital, India in 2022. He joined the Southwest Research Institute (SwRI) in Boulder in January 2023 as a Postdoctoral Researcher, collaborating with Dr. Lisa Upton on SFT modeling.
+            </p>
+<p>
+              His research targets automatic feature extraction (sunspots, filaments, plages) in solar images, machine learning applications in heliophysics, and tracking active regions. He is the developer of autoTaB, an automated bipolar magnetic region (BMR) tracking algorithm.
+            </p>
+<p style="font-size: 0.9rem; margin-bottom: 0;">
+<strong>Contact:</strong> <a href="mailto:bkjha.sun@gmail.com">bkjha.sun@gmail.com</a> • 
+              <strong>Website:</strong> <a href="https://bibhuraushan.github.io/" rel="noopener noreferrer" target="_blank">bibhuraushan.github.io</a>
+</p>
+</div>
+</div>
+<p style="font-size: 0.72rem; color: var(--text-tertiary); line-height: 1.5; margin-top: 3rem; border-top: 1px solid rgba(255, 154, 31, 0.08); padding-top: 1.5rem; text-align: center;">
+  * Note: Some material on this website is based upon work supported by grants from both NASA and NSF. Any opinions, findings, and conclusions or recommendations expressed here are those of the authors and do not necessarily reflect the views of these funding organizations.
+</p>
+</div>
+</section>
+<!-- Papers Section -->
+<section class="section" style="background: #080D1C; border-top: 1px solid rgba(255,154,31,0.08);">
+<div class="container">
+<h2 id="publications">Featured Publications</h2>
+<p>
+        a selection of our research papers mapping magnetic flux transport, convection, and solar cycle predictions.
+      </p>
+<div class="paper-list reveal-group">
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">Addressing Known Challenges in Solar Flare Forecasting I: Limb-Flare Prediction With a 4π Full-Heliosphere Framework</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">Leka, K. D.; Wagner, Eric L.; Upton, Lisa; Jha, Bibhuti Kumar; Jain, Kiran; Petty, Sara — <em>Space Weather</em> (01/2026)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2026SpWea..2404582L" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">Historical Reconstruction of Solar Surface Magnetism from Cycles 1—24 Using the Synthetic Active Region Generator and the Advective Flux Transport Model</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">Jha, Bibhuti Kumar; Upton, Lisa A.; Kopp, Greg; Coddington, Odele — <em>The Astrophysical Journal</em> (01/2026)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2026ApJ...997..279J" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">Quantifying when and where strong magnetic skew forms in a data-driven global non-potential model of the solar corona I: production and persistence of skew</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">Reid, J.; Mackay, D. H.; Upton, L. A. — <em>Monthly Notices of the Royal Astronomical Society</em> (01/2025)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2025MNRAS.542.2184R" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">A near-real-time data-assimilative model of the solar corona</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">Downs, Cooper; Linker, Jon A.; Caplan, Ronald M.; Mason, Emily I.; Riley, Pete; Davidson, Ryder; Reyes, Andres; Palmerio, Erika; Lionello, Roberto; Turtle, James; Ben-Nun, Michal; Stulajter, Miko M.; Titov, Viacheslav S.; Török, Tibor; Upton, Lisa A.; Attie, Raphael; Jha, Bibhuti K.; Arge, Charles N.; Henney, Carl J.; Valori, Gherardo; Strecker, Hanna; Calchetti, Daniele; Germerott, Dietmar; Hirzberger, Johann; Suárez, David Orozco; Rodríguez, Julian Blanco; Solanki, Sami K.; Cheng, Xin; Wu, Sizhe — <em>Science</em> (01/2025)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2025Sci...388.1306D" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">Quantifying Uncertainties in Solar Wind Forecasting due to Incomplete Solar Magnetic Field Information</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">Heinemann, Stephan G.; Pomoell, Jens; Caplan, Ronald M.; Owens, Mathew J.; Jones, Shaela ... Upton, Lisa; Jha, Bibhuti Kumar; Arge, Charles N. — <em>The Astrophysical Journal</em> (01/2025)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2025ApJ...986..166H" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">Structure and Dynamics of the Sun's Interior Revealed by the Helioseismic and Magnetic Imager</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">Kosovichev, Alexander G.; Basu, Sarbani; Bekki, Yuto; Buitrago-Casas, Juan Camilo; Chatzistergos, Theodosios ... Chen, Ruizhu; Christensen-Dalsgaard, Jørgen; Donea, Alina ... Fleck, Bernhard; Fournier, Damien; García, Rafael A.; Getling, Alexander V. ... Gizon, Laurent; Gough, Douglas O.; Hanasoge, Shravan; Hanson, Chris S. ... Hess Webber, Shea A.; Hoeksema, J. Todd; Howe, Rachel; Jain, Kiran; Kasapis, Spiridon; Kashyap, Samarth G.; Kitiashvili, Irina N.; Komm, Rudolf; Korzennik, Sylvain G.; Krivova, Natalie A.; Kuhn, Jeffrey R.; Liang, Zhi-Chao; Lindsey, Charles; Mahajan, Sushant S.; Mandal, Krishnendu; Mani, Prasad; Martinez Oliveros, Juan Carlos; Mathur, Savita; Rabello Soares, M. Cristina; Rajaguru, S. Paul; Reiter, Johann; Rhodes, Edward J.; Rozelot, Jean-Pierre; Scherrer, Philip H.; Solanki, Sami K.; Stefan, John T.; Toomre, Juri; Tripathy, Sushanta C.; Upton, Lisa A.; Zhao, Junwei — <em>Solar Physics</em> (01/2025)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2025SoPh..300...70K" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">Open-source Flux Transport (OFT). I. HipFT—High-performance Flux Transport</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">Caplan, Ronald M.; Stulajter, Miko M.; Linker, Jon A.; Downs, Cooper; Upton, Lisa A.; Jha, Bibhuti Kumar; Attie, Raphael; Arge, Charles N.; Henney, Carl J. — <em>The Astrophysical Journal Supplement Series</em> (01/2025)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2025ApJS..278...24C" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">Ca II K Polar Network Index of the Sun: A Proxy for Historical Polar Magnetic Field</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">Mishra, Dibya Kirti; Jha, Bibhuti Kumar; Chatzistergos, Theodosios ... Ermolli, Ilaria; Banerjee, Dipankar; Upton, Lisa A.; Khan, M. Saleem — <em>The Astrophysical Journal</em> (01/2025)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2025ApJ...982...78M" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">Predicting Interplanetary Shock Occurrence for Solar Cycle 25: Opportunities and Challenges in Space Weather Research</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">Oliveira, Denny M.; Allen, Robert C.; Alves, Livia R.; Blake, Séan P.; Carter, Brett A.; Chakrabarty, Dibyendu; D'Angelo, Giulia; Delano, Kevin; Echer, Ezequiel; Ferradas, Cristian P.; Finley, Matt G.; Gallardo-Lacourt, Bea; Gershman, Dan; Gjerloev, Jesper W.; Habarulema, John Bosco; Hartinger, Michael D.; Hajra, Rajkumar; Hayakawa, Hisashi; Juusola, Liisa; Laundal, Karl M.; Leamon, Robert J.; Madelaire, Michael; Martínez-Ledesma, Miguel; McIntosh, Scott M.; Miyoshi, Yoshizumi; Moldwin, Mark B.; Nahayo, Emmanuel; Nandy, Dibyendu; Nilam, Bhosale; Nykyri, Katariina; Paterson, William R.; Piersanti, Mirko; Pietropaolo, Ermanno; Rodger, Craig J.; Shah, Trunali; Smith, Andy W.; Srivastava, Nandita; Tsurutani, Bruce T.; Ram, S. Tulasi; Upton, Lisa A.; Veenadhari, Bhaskara; Vidal-Luengo, Sergio; Viljanen, Ari; Vines, Sarah K.; Yadav, Vipin K.; Yee, Jeng-Hwa; Weygand, James W.; Zesta, Eftyhia — <em>Space Weather</em> (01/2024)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2024SpWea..2203964O" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">Quantitative Comparisons between WSA Implementations</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">Jones, Shaela I.; Caplan, Ronald M.; Arge, C. Nick; Linker, Jon A.; Henney, Carl J.; Attie, Raphael; Downs, Cooper; Jha, Bibhuti Kumar; Turtle, James; Upton, Lisa — <em>The Astrophysical Journal</em> (01/2024)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2024ApJ...970...35J" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">The Effects of Including Farside Observations on In Situ Predictions of Heliospheric Models</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">Knizhnik, Kalman J.; Weberg, Micah J.; Zaveri, Ajeet Singh ... Ugarte-Urra, Ignacio; Wang, Yi-Ming; Upton, Lisa A.; Provornikova, Elena — <em>The Astrophysical Journal</em> (01/2024)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2024ApJ...969..154K" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">The Advective Flux Transport Model: Improving the Far Side with Active Regions Observed by STEREO 304 Å</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">Upton, Lisa A.; Ugarte-Urra, Ignacio; Warren, Harry P.; Hathaway, David H. — <em>The Astrophysical Journal</em> (01/2024)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2024ApJ...968..114U" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">Assessing the Performance of the ADAPT and AFT Flux Transport Models Using In Situ Measurements from Multiple Satellites</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">Knizhnik, Kalman J.; Weberg, Micah J.; Provornikova, Elena; Warren, Harry P.; Linton, Mark G.; Shaik, Shaheda Begum; Ko, Yuan-Kuen; Schonfeld, Samuel J.; Ugarte-Urra, Ignacio; Upton, Lisa A. — <em>The Astrophysical Journal</em> (01/2024)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2024ApJ...964..188K" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">The Sun's Large-Scale Flows I: Measurements of Differential Rotation &amp; Torsional Oscillation</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">Mahajan, Sushant S.; Upton, Lisa A.; Antia, H. M.; Basu, Sarbani; DeRosa, Marc L.; Hess Webber, Shea A.; Hoeksema, J. Todd; Jain, Kiran; Komm, Rudolf W.; Larson, Tim; Nagovitsyn, Yury A.; Pevtsov, Alexei A.; Roudier, Thierry; Tripathy, Sushanta C.; Ulrich, Roger K.; Zhao, Junwei — <em>Solar Physics</em> (01/2024)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2024SoPh..299...38M" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">Predicting the Timing of the Solar Cycle 25 Polar Field Reversal</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">Jha, Bibhuti Kumar; Upton, Lisa A. — <em>The Astrophysical Journal Letters</em> (01/2024)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2024ApJ...962L..15J" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">Solar Cycle Observations</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">Norton, Aimee; Howe, Rachel; Upton, Lisa; Usoskin, Ilya — <em>Space Science Reviews</em> (01/2023)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2023SSRv..219...64N" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">Solar Cycle Precursors and the Outlook for Cycle 25</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">Upton, L. A.; Hathaway, D. H. — <em>Journal of Geophysical Research (Space Physics)</em> (01/2023)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2023JGRA..12831681U" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">Physical Models for Solar Cycle Predictions</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">Bhowmik, Prantika; Jiang, Jie; Upton, Lisa; Lemerle, Alexandre; Nandy, Dibyendu — <em>Space Science Reviews</em> (01/2023)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2023SSRv..219...40B" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">Variations in differential rotation and meridional flow within the Sun's surface shear layer 1996─2022</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">Hathaway, David H.; Upton, Lisa A.; Mahajan, Sushant S. — <em>Frontiers in Astronomy and Space Sciences</em> (01/2022)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2022FrASS...907290H" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">A Comparison of Global Magnetofrictional Simulations of the 2015 March 20 Solar Eclipse</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">Mackay, Duncan H.; Upton, L. A. — <em>The Astrophysical Journal</em> (01/2022)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2022ApJ...939....9M" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">A Multicomponent Magnetic Proxy for Solar Activity</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">Warren, Harry P.; Floyd, Linton E.; Upton, Lisa A. — <em>Space Weather</em> (01/2021)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2021SpWea..1902860W" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">Determining the source and eruption dynamics of a stealth CME using NLFFF modelling and MHD simulations</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">Yardley, S. L.; Pagano, P.; Mackay, D. H.; Upton, L. A. — <em>Astronomy &amp; Astrophysics</em> (01/2021)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2021A&amp;A...652A.160Y" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">Hydrodynamic Properties of the Sun's Giant Cellular Flows</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">Hathaway, David H.; Upton, Lisa A. — <em>The Astrophysical Journal</em> (01/2021)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2021ApJ...908..160H" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">Investigation of the Middle Corona with SWAP and a Data-Driven Non-Potential Coronal Magnetic Field Model</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">Meyer, Karen A.; Mackay, Duncan H.; Talpeanu, Dana-Camelia; Upton, Lisa A.; West, Matthew J. — <em>Solar Physics</em> (01/2020)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2020SoPh..295..101M" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">The Extended Solar Cycle: Muddying the Waters of Solar/Stellar Dynamo Modeling Or Providing Crucial Observational Constraints?</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">Srivastava, Abhishek K.; McIntosh, Scott W.; Arge, N.; Banerjee, Dipankar; Dikpati, Mausumi; Dwivedi, Bhola N.; Guhathakurta, Madhulika; Karak, B. B.; Leamon, Robert J.; Matthew, Shibu K.; Munoz-Jaramillo, Andres; Nandy, D.; Norton, Aimee; Upton, L.; Chatterjee, S.; Mazumder, Rakesh; Rao, Yamini K.; Yadav, Rahul — <em>Frontiers in Astronomy and Space Sciences</em> (01/2018)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2018FrASS...5...38S" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">Global Non-Potential Magnetic Models of the Solar Corona During the March 2015 Eclipse</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">Yeates, Anthony R.; Amari, Tahar; Contopoulos, Ioannis; Feng, Xueshang; Mackay, Duncan H.; Miki\'c, Zoran; Wiegelmann, Thomas; Hutton, Joseph; Lowder, Christopher A.; Morgan, Huw; Petrie, Gordon; Rachmeler, Laurel A.; Upton, Lisa A.; Canou, Aurelien; Chopin, Pierre; Downs, Cooper; Druckmüller, Miloslav; Linker, Jon A.; Seaton, Daniel B.; Török, Tibor — <em>Space Science Reviews</em> (01/2018)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2018SSRv..214...99Y" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">Predicting the corona for the 21 August 2017 total solar eclipse</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">Miki\'c, Zoran; Downs, Cooper; Linker, Jon A.; Caplan, Ronald M.; Mackay, Duncan H.; Upton, Lisa A.; Riley, Pete; Lionello, Roberto; Török, Tibor; Titov, Viacheslav S.; Wijaya, Janvier; Druckmüller, Miloslav; Pasachoff, Jay M.; Carlos, Wendy — <em>Nature Astronomy</em> (01/2018)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2018NatAs...2..913M" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">An Updated Solar Cycle 25 Prediction With AFT: The Modern Minimum</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">Upton, Lisa A.; Hathaway, David H. — <em>Geophysical Research Letters</em> (01/2018)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2018GeoRL..45.8091U" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">Modeling Coronal Response in Decaying Active Regions with Magnetic Flux Transport and Steady Heating</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">Ugarte-Urra, Ignacio; Warren, Harry P.; Upton, Lisa A.; Young, Peter R. — <em>The Astrophysical Journal</em> (01/2017)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2017ApJ...846..165U" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">Predicting the amplitude and hemispheric asymmetry of solar cycle 25 with surface flux transport</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">Hathaway, David H.; Upton, Lisa A. — <em>Journal of Geophysical Research (Space Physics)</em> (01/2016)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2016JGRA..12110744H" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">The Sun's Photospheric Convection Spectrum</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">Hathaway, David H.; Teil, Thibaud; Norton, Aimee A.; Kitiashvili, Irina — <em>The Astrophysical Journal</em> (10/2015)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2015ApJ...811..105H" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">The Solar Cycle</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">Hathaway, David H. — <em>Living Reviews in Solar Physics</em> (09/2015)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2015LRSP...12....4H" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">Magnetic Flux Transport and the Long-term Evolution of Solar Active Regions</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">Ugarte-Urra, Ignacio; Upton, Lisa; Warren, Harry P.; Hathaway, David H. — <em>The Astrophysical Journal</em> (01/2015)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2015ApJ...815...90U" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">Magnetic Flux Transport at the Solar Surface</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">Jiang, J.; Hathaway, D. H.; Cameron, R. H.; Solanki, S. K.; Gizon, L.; Upton, L. — <em>Space Science Reviews</em> (12/2014)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2014SSRv..186..491J" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">Effects of Meridional Flow Variations on Solar Cycles 23 and 24</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">Upton, Lisa; Hathaway, David H. — <em>The Astrophysical Journal</em> (09/2014)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2014ApJ...792..142U" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">The solar meridional circulation and sunspot cycle variability</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">Hathaway, D. H.; Upton, L. — <em>Journal of Geophysical Research (Space Physics)</em> (05/2014)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2014JGRA..119.3316H" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">Predicting the Sun's Polar Magnetic Fields with a Surface Flux Transport Model</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">Upton, Lisa; Hathaway, David H. — <em>The Astrophysical Journal</em> (01/2014)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2014ApJ...780....5U" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">Giant Convection Cells Found on the Sun</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">Hathaway, David H.; Upton, Lisa; Colegrove, Owen — <em>Science</em> (12/2013)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2013Sci...342.1217H" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">A Curious History of Sunspot Penumbrae</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">Hathaway, D. H. — <em>Solar Physics</em> (09/2013)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2013SoPh..286..347H" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">Hemispheric Asymmetries of Solar Photospheric Magnetism: Radiative, Particulate, and Heliospheric Impacts</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">McIntosh, Scott W.; Leamon, Robert J.; Gurman, Joseph B.; Olive, Jean-Philippe; Cirtain, Jonathan W.; Hathaway, David H.; Burkepile, Joan; Miesch, Mark; Markel, Robert S.; Sitongia, Leonard — <em>The Astrophysical Journal</em> (03/2013)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2013ApJ...765..146M" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">Measurements of the Sun's High-latitude Meridional Circulation</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">Rightmire-Upton, Lisa; Hathaway, David H.; Kosak, Katie — <em>The Astrophysical Journal Letters</em> (12/2012)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2012ApJ...761L..14R" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">Supergranules as Probes of the Sun's Meridional Circulation</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">Hathaway, David H. — <em>The Astrophysical Journal</em> (11/2012)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2012ApJ...760...84H" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">Behavior of Solar Cycles 23 and 24 Revealed by Microwave Observations</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">Gopalswamy, N.; Yashiro, S.; Mäkelä, P.; Michalek, G.; Shibasaki, K.; Hathaway, D. H. — <em>The Astrophysical Journal Letters</em> (05/2012)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2012ApJ...750L..42G" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">Supergranules as Probes of Solar Convection Zone Dynamics</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">Hathaway, David H. — <em>The Astrophysical Journal Letters</em> (04/2012)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2012ApJ...749L..13H" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">A Standard Law for the Equatorward Drift of the Sunspot Zones</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">Hathaway, D. H. — <em>Solar Physics</em> (10/2011)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2011SoPh..273..221H" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">Variations in the Axisymmetric Transport of Magnetic Elements on the Sun: 1996-2010</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">Hathaway, David H.; Rightmire, Lisa — <em>The Astrophysical Journal</em> (03/2011)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2011ApJ...729...80H" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">The Advection of Supergranules by the Sun's Axisymmetric Flows</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">Hathaway, David H.; Williams, Peter E.; Dela Rosa, Kevin; Cuntz, Manfred — <em>The Astrophysical Journal</em> (12/2010)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2010ApJ...725.1082H" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">Variations in the Sun's Meridional Flow over a Solar Cycle</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">Hathaway, David H.; Rightmire, Lisa — <em>Science</em> (03/2010)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2010Sci...327.1350H" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+<div class="paper-item">
+<h4 style="color: var(--corona); margin-bottom: 4px;">The Solar Cycle</h4>
+<p style="font-size: 0.85rem; margin-bottom: 8px; color: var(--text-secondary);">Hathaway, David H. — <em>Living Reviews in Solar Physics</em> (03/2010)</p>
+<a class="chip chip--blue" href="https://ui.adsabs.harvard.edu/abs/2010LRSP....7....1H" rel="noopener noreferrer" target="_blank">ADS Abstract Link ↗</a>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- ── FOOTER ── -->
+<footer class="site-footer">
+<div class="footer-inner">
+<div>
+<a class="footer-brand-logo" href="index.html">
+<img alt="Solar Cycle Science" src="bin/BlueSun_small.jpg"/>
+<span>Solar<em>Cycle</em>Science</span>
+</a>
+<p class="footer-tagline">
+        Exploring the dynamic Sun — solar cycles, magnetic fields, surface flows,
+        and forecasts. Maintained by solar physicists Dr. Lisa Upton, Dr. David Hathaway, and Dr. Bibhuti Kumar Jha.
+      </p>
+<p class="footer-support">
+        Supported by grants from NASA and NSF, including a NASA grant to support the
+        <a href="https://COFFIES.stanford.edu" rel="noopener noreferrer" target="_blank">COFFIES DRIVE Center</a>.
+      </p>
+</div>
+<div class="footer-col">
+<h5>Learn</h5>
+<ul>
+<li><a href="basics.html">The Basics</a></li>
+<li><a href="solarcycle.html">Solar Cycles</a></li>
+<li><a href="activeregions.html">Active Regions</a></li>
+<li><a href="polarfields.html">Polar Fields</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h5>Research</h5>
+<ul>
+<li><a href="flows.html">Surface Flows</a></li>
+<li><a href="giantcells.html">Giant Cell Maps</a></li>
+<li><a href="aft.html">Advective Flux Transport</a></li>
+<li><a href="baseline.html">Baseline Maps</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h5>More</h5>
+<ul>
+<li><a href="forecasts.html">Predictions</a></li>
+<li><a href="media.html">Media</a></li>
+<li><a href="people.html">People</a></li>
+<li><a href="more.html">More Info</a></li>
+<li><a href="https://COFFIES.stanford.edu" rel="noopener noreferrer" target="_blank">COFFIES Center ↗</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">
+<span>&emsp;© SolarCycleScience.com 2026</span>
+</div>
+</footer>
+<!-- ── JAVASCRIPT ── -->
+<script>
+(function () {
+  'use strict';
+  /* active link */
+  const path = window.location.pathname.replace(/\/$/, '') || '/index.html';
+  document.querySelectorAll('.nav-links a, .mobile-nav-item').forEach(link => {
+    const href = (link.getAttribute('href') || '').replace(/\/$/, '');
+    if (path.endsWith(href) || (path === '/' && href === '/index.html')) {
+      link.classList.add('active');
+    }
+  });
+  /* Hamburger */
+  const burger = document.getElementById('nav-hamburger');
+  const mobileNav = document.getElementById('nav-mobile');
+  if (burger && mobileNav) {
+    burger.addEventListener('click', () => {
+      const open = burger.classList.toggle('open');
+      mobileNav.classList.toggle('open', open);
+      burger.setAttribute('aria-expanded', String(open));
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+    mobileNav.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        burger.classList.remove('open');
+        mobileNav.classList.remove('open');
+        burger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+  }
+  /* Dropdowns */
+  document.querySelectorAll('.nav-dropdown').forEach(dd => {
+    const toggle = dd.querySelector('.nav-dropdown-toggle');
+    if (!toggle) return;
+    toggle.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const open = dd.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', String(open));
+      }
+      if (e.key === 'Escape') {
+        dd.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.focus();
+      }
+    });
+    document.addEventListener('click', e => {
+      if (!dd.contains(e.target)) {
+        dd.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+  /* Scroll reveal */
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal, .reveal-group').forEach(el => obs.observe(el));
+  /* Nav border on scroll */
+  const nav = document.querySelector('.site-nav');
+  if (nav) {
+    window.addEventListener('scroll', () => {
+      nav.style.borderBottomColor = window.scrollY > 10
+        ? 'rgba(255,154,31,0.28)' : 'rgba(255,154,31,0.14)';
+    }, { passive: true });
+  }
+})();
+</script>
+</body>
+</html>

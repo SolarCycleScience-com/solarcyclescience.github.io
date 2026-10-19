@@ -1,0 +1,748 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Solar Cycle Science  —  Discover the Sun!</title>
+<meta content="Explore the science of the Sun  —  solar cycles, active regions, surface flows, polar fields, and predictions. Supported by NASA and NSF." name="description"/>
+<link href="bin/sun.ico" rel="icon"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;800&amp;family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&amp;display=swap" rel="stylesheet"/>
+<link href="solarcyclescience.css" rel="stylesheet"/>
+<style>
+    /* â”€â”€ Page-specific styles â”€â”€ */
+    /* Hero */
+    .hero {
+      position: relative;
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background:
+        radial-gradient(ellipse 55% 70% at 78% 50%, rgba(20, 60, 120, 0.25) 0%, transparent 60%),
+        radial-gradient(ellipse 30% 50% at 85% 50%, rgba(63, 169, 245, 0.08) 0%, transparent 65%),
+        #04060F;
+    }
+    .hero-sun-wrap {
+      position: absolute;
+      right: 5%;
+      top: 50%;
+      transform: translateY(-50%);
+      width: min(520px, 44vw);
+      aspect-ratio: 1;
+      z-index: 1;
+    }
+    .hero-sun-img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      border: 1px solid rgba(63, 169, 245, 0.2);
+    }
+    .hero-sun-ring {
+      position: absolute;
+      inset: -12%;
+      border-radius: 50%;
+      border: 1px solid rgba(63, 169, 245, 0.08);
+      pointer-events: none;
+    }
+    .hero-sun-ring-2 {
+      position: absolute;
+      inset: -28%;
+      border-radius: 50%;
+      border: 1px solid rgba(63, 169, 245, 0.04);
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 560px;
+    }
+    .hero-title {
+      font-family: 'Outfit', system-ui, sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.6rem, 5.5vw, 4rem);
+      line-height: 1.05;
+      color: #FFD166;
+      margin-bottom: 1.25rem;
+    }
+    .hero-title em {
+      font-style: normal;
+      color: #FF9a1F;
+    }
+    .hero-lead {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: var(--text-secondary);
+      max-width: 50ch;
+      margin-bottom: 2rem;
+    }
+    .hero-credit {
+      margin-top: 2.5rem;
+      font-size: 0.72rem;
+      color: var(--text-tertiary);
+      letter-spacing: 0.04em;
+      line-height: 1.6;
+    }
+    .hero-credit a { color: var(--text-tertiary); text-decoration: underline; }
+    .hero-credit a:hover { color: var(--text-secondary); }
+    /* Scroll cue */
+    .scroll-cue {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      z-index: 2;
+      opacity: 0.4;
+    }
+    .scroll-cue span {
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+    }
+    .scroll-cue-line {
+      width: 1px;
+      height: 36px;
+      background: linear-gradient(to bottom, var(--text-secondary), transparent);
+    }
+    /* Live image strip */
+    .live-strip {
+      background: #080D1C;
+      border-top: 1px solid rgba(255,154,31,0.1);
+      border-bottom: 1px solid rgba(255,154,31,0.1);
+      padding: 1.5rem 0;
+    }
+    .live-strip-inner {
+      max-width: 1100px;
+      margin-inline: auto;
+      padding-inline: 24px;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .live-badge {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #FF9a1F;
+      flex-shrink: 0;
+      text-decoration: none;
+      transition: color var(--duration) var(--ease);
+    }
+    .live-badge:hover {
+      color: var(--corona);
+    }
+    .live-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #FF6B35;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(0.75); }
+    }
+    .live-img-frame {
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid rgba(63,169,245,0.15);
+      flex-shrink: 0;
+    }
+    .live-img-frame img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      display: block;
+    }
+    .live-desc {
+      font-size: 0.82rem;
+      color: var(--text-tertiary);
+      line-height: 1.6;
+      max-width: 50ch;
+    }
+    .live-desc strong { color: var(--text-secondary); font-weight: 500; }
+    /* Intro section */
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .intro-text h2 {
+      font-family: 'Outfit', system-ui, sans-serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      color: #FFD166;
+      margin-bottom: 1.25rem;
+    }
+    .intro-text p {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+    .intro-img {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255,154,31,0.12);
+      aspect-ratio: 1;
+    }
+    .intro-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .intro-img figcaption {
+      padding: 10px 14px;
+      font-size: 0.72rem;
+      color: var(--text-tertiary);
+      font-style: italic;
+      background: #080D1C;
+      line-height: 1.5;
+    }
+    /* Topics section */
+    .topics-section { padding-block: 80px; }
+    .section-header {
+      margin-bottom: 2.5rem;
+    }
+    .section-header h2 {
+      font-family: 'Outfit', system-ui, sans-serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      color: #FFD166;
+      margin-bottom: 0.5rem;
+    }
+    .section-header p {
+      color: var(--text-tertiary);
+      font-size: 0.9rem;
+      max-width: 55ch;
+    }
+    .topic-card {
+      background: #080D1C;
+      border: 1px solid rgba(255,154,31,0.12);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-decoration: none;
+      display: block;
+      transition: border-color 280ms ease, background 280ms ease, transform 280ms ease;
+    }
+    .topic-card:hover {
+      border-color: rgba(255,154,31,0.35);
+      background: #0D1428;
+      transform: translateY(-3px);
+    }
+    .topic-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+    .icon-gold   { background: rgba(255,154,31,0.12); }
+    .icon-blue   { background: rgba(63,169,245,0.1); }
+    .icon-flare  { background: rgba(255,107,53,0.1); }
+    .icon-corona { background: rgba(255,209,102,0.1); }
+    .topic-card h3 {
+      font-family: 'Outfit', system-ui, sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #F0EaD6;
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+    .topic-card p {
+      font-size: 0.82rem;
+      color: var(--text-tertiary);
+      line-height: 1.65;
+      margin: 0;
+    }
+    .topic-card .topic-arrow {
+      display: inline-block;
+      margin-top: 0.75rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #FF9a1F;
+      opacity: 0;
+      transform: translateX(-4px);
+      transition: opacity 220ms ease, transform 220ms ease;
+    }
+    .topic-card:hover .topic-arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .topics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+    /* Predictions callout */
+    .predictions-callout {
+      background: #080D1C;
+      border: 1px solid rgba(255,154,31,0.2);
+      border-radius: 16px;
+      padding: 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: center;
+    }
+    .predictions-callout h2 {
+      font-family: 'Outfit', system-ui, sans-serif;
+      font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+      color: #FFD166;
+      margin-bottom: 0.75rem;
+    }
+    .predictions-callout p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      max-width: 55ch;
+      margin-bottom: 1.25rem;
+    }
+    .cycle-stat {
+      text-align: center;
+      padding: 1.5rem 2rem;
+      background: #0D1428;
+      border: 1px solid rgba(255,154,31,0.15);
+      border-radius: 12px;
+      white-space: nowrap;
+    }
+    .cycle-stat-number {
+      font-family: 'Outfit', system-ui, sans-serif;
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: #FF9a1F;
+      line-height: 1;
+      display: block;
+    }
+    .cycle-stat-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      display: block;
+      margin-top: 6px;
+    }
+    .cycle-stat-sub {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      display: block;
+      margin-top: 4px;
+    }
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero-sun-wrap { display: none; }
+      .hero-content  { max-width: 100%; }
+      .intro-grid    { grid-template-columns: 1fr; }
+      .intro-img     { max-width: 480px; }
+      .predictions-callout { grid-template-columns: 1fr; }
+      .footer-inner  { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 580px) {
+      .hero { min-height: 80vh; padding-top: 3rem; }
+      .footer-inner { grid-template-columns: 1fr; }
+      .live-img-frame { display: none; }
+    }
+  </style>
+</head>
+<body>
+<!-- ── NAVIGATION ── -->
+<header>
+<nav aria-label="Main navigation" class="site-nav" role="navigation">
+<div class="nav-inner">
+<!-- Logo -->
+<a aria-label="Solar Cycle Science — Home" class="nav-logo" href="index.html" style="display:flex;align-items:center;gap:14px;text-decoration:none;">
+<img alt="Solar Cycle Science logo" aria-hidden="true" height="60" src="bin/BlueSun_small.jpg" style="flex-shrink:0;border-radius:50%;display:block;border:1.5px solid rgba(255, 154, 31, 0.35);box-shadow: 0 0 12px rgba(255, 154, 31, 0.25);" width="60"/>
+<span style="display:flex;flex-direction:column;gap:2px;">
+<span style="font-family:'Outfit',system-ui,sans-serif;font-weight:800;font-size:1.45rem;letter-spacing:0.02em;color:#FFD166;line-height:1.1;">Solar<span style="color:#FF9A1F;">Cycle</span>Science</span>
+<span style="font-family:'DM Sans',system-ui,sans-serif;font-size:0.78rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#3FA9F5;line-height:1;">Discover the Sun!</span>
+</span>
+</a>
+<!-- Desktop links -->
+<ul class="nav-links" id="nav-links">
+<li><a href="index.html">Home</a></li>
+<li><a href="basics.html">Basics</a></li>
+<li class="nav-dropdown" id="dropdown-science">
+<button aria-expanded="false" aria-haspopup="true" class="nav-dropdown-toggle">Science <span aria-hidden="true" class="chevron"></span></button>
+<ul class="nav-dropdown-menu" role="menu">
+<li role="menuitem"><a href="activeregions.html"><span class="nav-dot nav-dot--flare"></span>Active Regions</a></li>
+<li role="menuitem"><a href="flows.html"><span class="nav-dot nav-dot--blue"></span>Surface Flows</a></li>
+<li role="menuitem"><a href="giantcells.html"><span class="nav-dot nav-dot--blue"></span>Giant Cell Maps</a></li>
+<li role="menuitem"><a href="polarfields.html"><span class="nav-dot nav-dot--corona"></span>Polar Fields</a></li>
+<li role="menuitem"><a href="solarcycle.html"><span class="nav-dot nav-dot--gold"></span>Solar Cycles</a></li>
+<li role="menuitem"><a href="aft.html"><span class="nav-dot nav-dot--gold"></span>Advective Flux Transport</a></li>
+<li role="menuitem"><a href="baseline.html"><span class="nav-dot nav-dot--gold"></span>Baseline Maps</a></li>
+</ul>
+</li>
+<li><a href="forecasts.html">Predictions</a></li>
+<li><a href="media.html">Media</a></li>
+<li class="nav-dropdown" id="dropdown-about">
+<button aria-expanded="false" aria-haspopup="true" class="nav-dropdown-toggle">About <span aria-hidden="true" class="chevron"></span></button>
+<ul class="nav-dropdown-menu" role="menu">
+<li role="menuitem"><a href="people.html"><span class="nav-dot nav-dot--corona"></span>People</a></li>
+<li role="menuitem"><a href="more.html"><span class="nav-dot nav-dot--gold"></span>More Info</a></li>
+</ul>
+</li>
+<li><a class="nav-cta" href="forecasts.html">Latest Forecasts</a></li>
+</ul>
+<!-- ── Hamburger ── -->
+<button aria-expanded="false" aria-label="Toggle menu" class="nav-hamburger" id="nav-hamburger">
+<span></span><span></span><span></span>
+</button>
+</div>
+</nav>
+<!-- Mobile slide-out menu -->
+<nav aria-label="Mobile navigation" class="nav-mobile-overlay" id="nav-mobile">
+<span class="mobile-section-label">Main</span>
+<a class="mobile-nav-item" href="index.html">Home</a>
+<a class="mobile-nav-item" href="basics.html">Basics</a>
+<a class="mobile-nav-item" href="forecasts.html">Predictions</a>
+<a class="mobile-nav-item" href="media.html">Media</a>
+<hr class="mobile-divider"/>
+<span class="mobile-section-label">Science Topics</span>
+<a class="mobile-nav-item" href="activeregions.html"><span class="nav-dot nav-dot--flare"></span> Active Regions</a>
+<a class="mobile-nav-item" href="flows.html"><span class="nav-dot nav-dot--blue"></span> Surface Flows</a>
+<a class="mobile-nav-item" href="giantcells.html"><span class="nav-dot nav-dot--blue"></span> Giant Cell Maps</a>
+<a class="mobile-nav-item" href="polarfields.html"><span class="nav-dot nav-dot--corona"></span> Polar Fields</a>
+<a class="mobile-nav-item" href="solarcycle.html"><span class="nav-dot nav-dot--gold"></span> Solar Cycles</a>
+<a class="mobile-nav-item" href="aft.html"><span class="nav-dot nav-dot--gold"></span> Advective Flux Transport</a>
+<a class="mobile-nav-item" href="baseline.html"><span class="nav-dot nav-dot--gold"></span> Baseline Maps</a>
+<hr class="mobile-divider"/>
+<span class="mobile-section-label">About</span>
+<a class="mobile-nav-item" href="people.html">People</a>
+<a class="mobile-nav-item" href="more.html">More Info</a>
+</nav>
+</header>
+<main>
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+       HERO
+  â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<section class="hero">
+<div class="hero-bg"></div>
+<div aria-hidden="true" class="hero-sun-wrap">
+<img alt="" class="hero-sun-img" loading="lazy" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 1024px" src="https://SDO.gsfc.nasa.gov/assets/img/latest/latest_4096_HMIBC.jpg" srcset="https://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_HMIBC.jpg 1024w, https://SDO.gsfc.nasa.gov/assets/img/latest/latest_4096_HMIBC.jpg 4096w"/>
+<div class="hero-sun-ring"></div>
+<div class="hero-sun-ring-2"></div>
+</div>
+<div class="container">
+<div class="hero-content reveal">
+<p class="eyebrow">Heliophysics &amp; solar science</p>
+<h1 class="hero-title">Discover<br/>the <em>Sun!</em></h1>
+<p class="hero-lead">
+          Once thought constant and unchanging, the Sun is profoundly dynamic  — 
+          driving our climate, shaping our solar system, and redefining our
+          understanding of stars with every new discovery.
+        </p>
+<div class="btn-row">
+<a class="btn btn-primary" href="basics.html">Start with the Basics</a>
+<a class="btn btn-secondary" href="forecasts.html">Latest Predictions</a>
+</div>
+<p class="hero-credit">
+          Latest magnetogram courtesy of
+          <a href="https://SDO.gsfc.nasa.gov" rel="noopener noreferrer" target="_blank">NASA/SDO</a>
+          and the HMI science teams.
+        </p>
+</div>
+</div>
+<div aria-hidden="true" class="scroll-cue">
+<span>Explore</span>
+<div class="scroll-cue-line"></div>
+</div>
+</section>
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+       LIVE IMaGE STRIP
+  â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<div class="live-strip">
+<div class="live-strip-inner">
+<a class="live-badge" href="https://SDO.gsfc.nasa.gov/data/" rel="noopener noreferrer" target="_blank">
+<span class="live-dot"></span>
+        Live solar image ↗
+      </a>
+<div class="live-img-frame">
+<img alt="Latest live HMI intensitygram image of the Sun from NASA's Solar Dynamics Observatory" loading="lazy" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 1024px" src="https://SDO.gsfc.nasa.gov/assets/img/latest/latest_4096_HMIBC.jpg" srcset="https://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_HMIBC.jpg 1024w, https://SDO.gsfc.nasa.gov/assets/img/latest/latest_4096_HMIBC.jpg 4096w"/>
+</div>
+<p class="live-desc">
+<strong>Sun's Magnetic Field</strong>  —  This magnetogram from NASA's
+        Solar Dynamics Observatory shows the latest view of the Sun's magnetic
+        activity. Bright and dark regions indicate opposite magnetic polarities
+        across the solar surface.
+      </p>
+</div>
+</div>
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+       INTRO
+  â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<section class="section" style="padding-block: 80px;">
+<div class="container">
+<div class="intro-grid reveal-group">
+<div class="intro-text">
+<p class="eyebrow">about this site</p>
+<h2>a window into the life of our star</h2>
+<p>
+            The Sun provides Earth with warmth, light, and the energy that fuels
+            our entire ecosystem. as the largest body in the solar system, it guides
+            the planets in their orbits and has been worshiped by cultures throughout
+            history  —  yet there is still much we do not know.
+          </p>
+<p>
+            Since the invention of the telescope, knowledge of the Sun has grown at
+            an extraordinary rate. Each discovery brings new ideas and often conflict.
+            Even now, our understanding is constantly being redefined.
+          </p>
+<p>
+            This site was built and is maintained by solar physicists
+            <a href="people.html">Dr. Lisa Upton, Dr. David Hathaway, and Dr. Bibhuti Kumar Jha</a>,
+            supported by grants from NASA and NSF, including a NASA grant to support the
+            <a href="https://COFFIES.stanford.edu" rel="noopener noreferrer" target="_blank">COFFIES DRIVE Center</a>.
+          </p>
+<div class="btn-row" style="margin-top: 1.5rem;">
+<a class="btn btn-ghost" href="basics.html">Explore the Basics →</a>
+</div>
+</div>
+<figure class="intro-img">
+<img alt="Ultraviolet image of the Sun from NASA/SDO" src="bin/BlueSun_small.jpg"/>
+<figcaption>Ultraviolet image of the Sun. Courtesy NASA/SDO.</figcaption>
+</figure>
+</div>
+</div>
+</section>
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+       SCIENCE TOPICS
+  â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<section class="topics-section" style="background: #080D1C; border-top: 1px solid rgba(255,154,31,0.08); border-bottom: 1px solid rgba(255,154,31,0.08);">
+<div class="container">
+<div class="section-header reveal">
+<p class="eyebrow">Research topics</p>
+<h2>Explore the science</h2>
+<p>From the basics of stellar evolution to cutting-edge observations of solar flows and magnetic fields.</p>
+</div>
+<div class="topics-grid reveal-group">
+<a class="topic-card" href="basics.html">
+<div class="topic-icon icon-corona">★</div>
+<h3>The Basics</h3>
+<p>Stellar evolution, solar structure, and what makes the Sun tick from core to corona.</p>
+<span class="topic-arrow">Explore →</span>
+</a>
+<a class="topic-card" href="activeregions.html">
+<div class="topic-icon icon-flare">▶</div>
+<h3>Active Regions</h3>
+<p>Sunspots, magnetic flux emergence, and the explosive phenomena that erupt from them.</p>
+<span class="topic-arrow">Explore →</span>
+</a>
+<a class="topic-card" href="flows.html">
+<div class="topic-icon icon-blue">⇅</div>
+<h3>Surface Flows</h3>
+<p>Differential rotation, meridional circulation, and the convective motions shaping solar magnetism.</p>
+<span class="topic-arrow">Explore →</span>
+</a>
+<a class="topic-card" href="giantcells.html">
+<div class="topic-icon icon-blue">■</div>
+<h3>Giant Cell Maps</h3>
+<p>Large-scale convective structures spanning the solar interior, mapped with helioseismology.</p>
+<span class="topic-arrow">Explore →</span>
+</a>
+<a class="topic-card" href="polarfields.html">
+<div class="topic-icon icon-corona">⇡</div>
+<h3>Polar Fields</h3>
+<p>How flux transport to the poles sets the seed for the next solar cycle  —  a key forecasting tool.</p>
+<span class="topic-arrow">Explore →</span>
+</a>
+<a class="topic-card" href="solarcycle.html">
+<div class="topic-icon icon-gold">↻</div>
+<h3>Solar Cycles</h3>
+<p>The 11-year rhythm of solar activity  —  its history, its causes, and how we track it.</p>
+<span class="topic-arrow">Explore →</span>
+</a>
+<a class="topic-card" href="aft.html">
+<div class="topic-icon icon-gold">⇨</div>
+<h3>Advective Flux Transport</h3>
+<p>The AFT model  —  how surface flows redistribute magnetic flux and drive long-term evolution.</p>
+<span class="topic-arrow">Explore →</span>
+</a>
+<a class="topic-card" href="baseline.html">
+<div class="topic-icon icon-blue">■</div>
+<h3>Baseline Maps</h3>
+<p>Reference magnetic maps that establish the baseline state of the photospheric field.</p>
+<span class="topic-arrow">Explore →</span>
+</a>
+</div>
+</div>
+</section>
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+       PREDICTIONS CaLLOUT
+  â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<section class="section" style="padding-block: 80px;">
+<div class="container">
+<div class="predictions-callout reveal">
+<div>
+<p class="eyebrow">Cycle 25 forecast</p>
+<h2>Solar Cycle Predictions</h2>
+<p>
+            We have now passed the maximum of Solar Cycle 25, established at
+            160.8 in October 2024. Our curve-fitting and precursor methods  — 
+            anchored by polar field strength at cycle minimum  —  continue to
+            provide guidance on the cycle's evolution and decline.
+          </p>
+<div class="btn-row">
+<a class="btn btn-primary" href="forecasts.html">View Full Predictions</a>
+<a class="btn btn-ghost" href="solarcycle.html">about Solar Cycles</a>
+</div>
+</div>
+<div class="cycle-stat">
+<span class="cycle-stat-number">25</span>
+<span class="cycle-stat-label">Current Solar Cycle</span>
+<span class="cycle-stat-sub">Peak: 160.8 · Oct 2024</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+     FOOTER
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<footer class="site-footer">
+<div class="footer-inner">
+<div>
+<a class="footer-brand-logo" href="index.html">
+<img alt="Solar Cycle Science" src="bin/BlueSun_small.jpg"/>
+<span>Solar<em>Cycle</em>Science</span>
+</a>
+<p class="footer-tagline">
+        Exploring the dynamic Sun — solar cycles, magnetic fields, surface flows,
+        and forecasts. Maintained by solar physicists Dr. Lisa Upton, Dr. David Hathaway, and Dr. Bibhuti Kumar Jha.
+      </p>
+<p class="footer-support">
+        Supported by grants from NASA and NSF, including a NASA grant to support the
+        <a href="https://COFFIES.stanford.edu" rel="noopener noreferrer" target="_blank">COFFIES DRIVE Center</a>.
+      </p>
+</div>
+<div class="footer-col">
+<h5>Learn</h5>
+<ul>
+<li><a href="basics.html">The Basics</a></li>
+<li><a href="solarcycle.html">Solar Cycles</a></li>
+<li><a href="activeregions.html">Active Regions</a></li>
+<li><a href="polarfields.html">Polar Fields</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h5>Research</h5>
+<ul>
+<li><a href="flows.html">Surface Flows</a></li>
+<li><a href="giantcells.html">Giant Cell Maps</a></li>
+<li><a href="aft.html">Advective Flux Transport</a></li>
+<li><a href="baseline.html">Baseline Maps</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h5>More</h5>
+<ul>
+<li><a href="forecasts.html">Predictions</a></li>
+<li><a href="media.html">Media</a></li>
+<li><a href="people.html">People</a></li>
+<li><a href="more.html">More Info</a></li>
+<li><a href="https://COFFIES.stanford.edu" rel="noopener noreferrer" target="_blank">COFFIES Center ↗</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">
+<span>&emsp;© SolarCycleScience.com 2026</span>
+</div>
+</footer>
+<!-- ── JAVASCRIPT ── -->
+<script>
+(function () {
+  'use strict';
+  /* active link */
+  const path = window.location.pathname.replace(/\/$/, '') || '/index.html';
+  document.querySelectorAll('.nav-links a, .mobile-nav-item').forEach(link => {
+    const href = (link.getAttribute('href') || '').replace(/\/$/, '');
+    if (path.endsWith(href) || (path === '/' && href === '/index.html')) {
+      link.classList.add('active');
+    }
+  });
+  /* Hamburger */
+  const burger = document.getElementById('nav-hamburger');
+  const mobileNav = document.getElementById('nav-mobile');
+  if (burger && mobileNav) {
+    burger.addEventListener('click', () => {
+      const open = burger.classList.toggle('open');
+      mobileNav.classList.toggle('open', open);
+      burger.setAttribute('aria-expanded', String(open));
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+    mobileNav.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        burger.classList.remove('open');
+        mobileNav.classList.remove('open');
+        burger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+  }
+  /* Dropdowns */
+  document.querySelectorAll('.nav-dropdown').forEach(dd => {
+    const toggle = dd.querySelector('.nav-dropdown-toggle');
+    if (!toggle) return;
+    toggle.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const open = dd.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', String(open));
+      }
+      if (e.key === 'Escape') {
+        dd.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.focus();
+      }
+    });
+    document.addEventListener('click', e => {
+      if (!dd.contains(e.target)) {
+        dd.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+  /* Scroll reveal */
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal, .reveal-group').forEach(el => obs.observe(el));
+  /* Nav border on scroll */
+  const nav = document.querySelector('.site-nav');
+  if (nav) {
+    window.addEventListener('scroll', () => {
+      nav.style.borderBottomColor = window.scrollY > 10
+        ? 'rgba(255,154,31,0.28)' : 'rgba(255,154,31,0.14)';
+    }, { passive: true });
+  }
+})();
+</script>
+</body>
+</html>

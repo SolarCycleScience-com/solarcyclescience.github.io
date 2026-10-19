@@ -1,0 +1,528 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Solar Cycle Science  —  Navigation Component</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;800&amp;family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&amp;display=swap" rel="stylesheet"/>
+<!-- Global styles (link to your solarcyclescience.css) -->
+<!-- <link rel="stylesheet" href="solarcyclescience.css"> -->
+<style>
+    /* â”€â”€ Inline tokens for standalone preview â”€â”€ */
+    :root {
+      --bg-deep:      #04060F;
+      --bg-surface:   #080D1C;
+      --bg-raised:    #0D1428;
+      --bg-overlay:   rgba(8, 13, 28, 0.92);
+      --gold:         #FF9a1F;
+      --gold-dim:     #C46800;
+      --gold-glow:    rgba(255, 154, 31, 0.16);
+      --corona:       #FFD166;
+      --flare:        #FF6B35;
+      --magnetism:    #3Fa9F5;
+      --text-primary:   #F0EaD6;
+      --text-secondary: #D2C7B5;
+      --text-tertiary:  #9C9082;
+      --border:         rgba(255, 154, 31, 0.14);
+      --border-hover:   rgba(255, 154, 31, 0.35);
+      --nav-height:     64px;
+      --radius-md:      8px;
+      --radius-lg:      12px;
+      --radius-pill:    999px;
+      --font-display:   'Outfit', system-ui, sans-serif;
+      --font-body:      'DM Sans', system-ui, sans-serif;
+      --ease:           cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --duration:       280ms;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-deep);
+      color: var(--text-primary);
+      -webkit-font-smoothing: antialiased;
+      /* Demo page padding so nav isn't the only thing visible */
+      padding-bottom: 80px;
+    }
+    /* â”€â”€ NaVIGaTION â”€â”€ */
+    .site-nav {
+      position: fixed;
+      top: var(--space-4);
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(calc(100% - var(--space-8)), var(--max-width));
+      z-index: 100;
+      height: var(--nav-height);
+      background: var(--bg-overlay);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      transition: border-color var(--duration) var(--ease),
+                  background var(--duration) var(--ease);
+    }
+    .nav-inner {
+      max-width: 1100px;
+      margin-inline: auto;
+      padding-inline: 24px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    /* Logo */
+    .nav-logo {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.05rem;
+      letter-spacing: 0.02em;
+      color: var(--corona);
+      text-decoration: none;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .nav-logo span { color: var(--gold); }
+    /* Link list */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      list-style: none;
+    }
+    .nav-links > li { position: relative; }
+    .nav-links a,
+    .nav-dropdown-toggle {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      padding: 6px 10px;
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition:
+        color var(--duration) var(--ease),
+        background var(--duration) var(--ease);
+      white-space: nowrap;
+    }
+    .nav-links a:hover,
+    .nav-links a.active,
+    .nav-dropdown-toggle:hover,
+    .nav-dropdown-toggle.active {
+      color: var(--gold);
+      background: var(--gold-glow);
+    }
+    /* Chevron icon for dropdowns */
+    .chevron {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-right: 1.5px solid currentColor;
+      border-bottom: 1.5px solid currentColor;
+      transform: rotate(45deg) translateY(-2px);
+      opacity: 0.5;
+      transition: transform var(--duration) var(--ease);
+      flex-shrink: 0;
+    }
+    .nav-dropdown.open .chevron,
+    .nav-dropdown:focus-within .chevron {
+      transform: rotate(-135deg) translateY(-2px);
+    }
+    /* Dropdown panel */
+    .nav-dropdown-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 10px);
+      left: 50%;
+      transform: translateX(-50%);
+      min-width: 210px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 6px;
+      list-style: none;
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.7);
+      /* triangle pointer */
+    }
+    .nav-dropdown-menu::before {
+      content: '';
+      position: absolute;
+      top: -5px;
+      left: 50%;
+      transform: translateX(-50%) rotate(45deg);
+      width: 9px;
+      height: 9px;
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border);
+      border-left: 1px solid var(--border);
+    }
+    .nav-dropdown:hover .nav-dropdown-menu,
+    .nav-dropdown.open .nav-dropdown-menu {
+      display: block;
+    }
+    .nav-dropdown-menu li a {
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+      text-transform: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .nav-dropdown-menu li a:hover {
+      color: var(--gold);
+      background: var(--gold-glow);
+    }
+    /* Dot category indicator */
+    .nav-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .nav-dot--gold     { background: var(--gold); }
+    .nav-dot--blue     { background: var(--magnetism); }
+    .nav-dot--flare    { background: var(--flare); }
+    .nav-dot--corona   { background: var(--corona); }
+    /* active page indicator */
+    .nav-active-indicator {
+      position: absolute;
+      bottom: -1px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20px;
+      height: 2px;
+      background: var(--gold);
+      border-radius: 1px;
+      opacity: 0;
+      transition: opacity var(--duration) var(--ease);
+    }
+    .nav-links a.active ~ .nav-active-indicator { opacity: 1; }
+    /* CTa button in nav */
+    .nav-cta {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--bg-deep) !important;
+      background: var(--gold) !important;
+      border-radius: var(--radius-md);
+      padding: 7px 14px !important;
+      transition:
+        background var(--duration) var(--ease),
+        transform 120ms var(--ease) !important;
+    }
+    .nav-cta:hover {
+      background: var(--corona) !important;
+      color: var(--bg-deep) !important;
+      transform: scale(1.02);
+    }
+    /* Hamburger */
+    .nav-hamburger {
+      display: none;
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 8px 10px;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 4px;
+      align-items: center;
+      justify-content: center;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 18px;
+      height: 1.5px;
+      background: var(--text-secondary);
+      border-radius: 1px;
+      transition:
+        transform var(--duration) var(--ease),
+        opacity var(--duration) var(--ease);
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+    /* Mobile overlay */
+    .nav-mobile-overlay {
+      display: none;
+      position: fixed;
+      top: var(--nav-height);
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--bg-deep);
+      padding: 20px 24px;
+      overflow-y: auto;
+      flex-direction: column;
+      gap: 4px;
+      z-index: 99;
+      border-top: 1px solid var(--border);
+    }
+    .nav-mobile-overlay.open { display: flex; }
+    .mobile-nav-item {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      padding: 12px 16px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition:
+        color var(--duration) var(--ease),
+        background var(--duration) var(--ease);
+    }
+    .mobile-nav-item:hover, .mobile-nav-item.active {
+      color: var(--gold);
+      background: var(--gold-glow);
+    }
+    .mobile-section-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      padding: 16px 16px 6px;
+    }
+    .mobile-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin-block: 8px;
+    }
+    /* â”€â”€ DEMO PaGE CONTENT â”€â”€ */
+    .demo-body {
+      max-width: 1100px;
+      margin-inline: auto;
+      padding: 60px 24px;
+    }
+    .demo-title {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--corona);
+      margin-bottom: 12px;
+    }
+    .demo-note {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 55ch;
+      margin-bottom: 32px;
+    }
+    .demo-code {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px 24px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.8rem;
+      color: var(--gold);
+      line-height: 1.8;
+      overflow-x: auto;
+      white-space: pre;
+    }
+    .demo-code .c { color: var(--text-tertiary); }
+    .demo-code .t { color: var(--corona); }
+    .demo-code .s { color: var(--magnetism); }
+    .demo-code .a { color: var(--flare); }
+  </style>
+</head>
+<body>
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+     NaVIGaTION COMPONENT
+     Copy everything between these comments
+     into each page of your site.
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<header>
+<nav aria-label="Main navigation" class="site-nav" role="navigation">
+<div class="nav-inner">
+<!-- Logo -->
+<a aria-label="Solar Cycle Science — Home" class="nav-logo" href="index.html" style="display:flex;align-items:center;gap:14px;text-decoration:none;">
+<img alt="Solar Cycle Science logo" aria-hidden="true" height="60" src="bin/BlueSun_small.jpg" style="flex-shrink:0;border-radius:50%;display:block;border:1.5px solid rgba(255, 154, 31, 0.35);box-shadow: 0 0 12px rgba(255, 154, 31, 0.25);" width="60"/>
+<span style="display:flex;flex-direction:column;gap:2px;">
+<span style="font-family:'Outfit',system-ui,sans-serif;font-weight:800;font-size:1.45rem;letter-spacing:0.02em;color:#FFD166;line-height:1.1;">Solar<span style="color:#FF9A1F;">Cycle</span>Science</span>
+<span style="font-family:'DM Sans',system-ui,sans-serif;font-size:0.78rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#3FA9F5;line-height:1;">Discover the Sun!</span>
+</span>
+</a>
+<!-- Desktop links -->
+<ul class="nav-links" id="nav-links">
+<li><a href="index.html">Home</a></li>
+<li><a href="basics.html">Basics</a></li>
+<li class="nav-dropdown" id="dropdown-science">
+<button aria-expanded="false" aria-haspopup="true" class="nav-dropdown-toggle">Science <span aria-hidden="true" class="chevron"></span></button>
+<ul class="nav-dropdown-menu" role="menu">
+<li role="menuitem"><a href="activeregions.html"><span class="nav-dot nav-dot--flare"></span>Active Regions</a></li>
+<li role="menuitem"><a href="flows.html"><span class="nav-dot nav-dot--blue"></span>Surface Flows</a></li>
+<li role="menuitem"><a href="giantcells.html"><span class="nav-dot nav-dot--blue"></span>Giant Cell Maps</a></li>
+<li role="menuitem"><a href="polarfields.html"><span class="nav-dot nav-dot--corona"></span>Polar Fields</a></li>
+<li role="menuitem"><a href="solarcycle.html"><span class="nav-dot nav-dot--gold"></span>Solar Cycles</a></li>
+<li role="menuitem"><a href="aft.html"><span class="nav-dot nav-dot--gold"></span>Advective Flux Transport</a></li>
+<li role="menuitem"><a href="baseline.html"><span class="nav-dot nav-dot--gold"></span>Baseline Maps</a></li>
+</ul>
+</li>
+<li><a href="forecasts.html">Predictions</a></li>
+<li><a href="media.html">Media</a></li>
+<li class="nav-dropdown" id="dropdown-about">
+<button aria-expanded="false" aria-haspopup="true" class="nav-dropdown-toggle">About <span aria-hidden="true" class="chevron"></span></button>
+<ul class="nav-dropdown-menu" role="menu">
+<li role="menuitem"><a href="people.html"><span class="nav-dot nav-dot--corona"></span>People</a></li>
+<li role="menuitem"><a href="more.html"><span class="nav-dot nav-dot--gold"></span>More Info</a></li>
+</ul>
+</li>
+<li><a class="nav-cta" href="forecasts.html">Latest Forecasts</a></li>
+</ul>
+<!-- Hamburger (mobile) -->
+<button aria-expanded="false" aria-label="Toggle menu" class="nav-hamburger" id="nav-hamburger">
+<span></span><span></span><span></span>
+</button>
+</div>
+</nav>
+<!-- Mobile slide-out menu -->
+<nav aria-label="Mobile navigation" class="nav-mobile-overlay" id="nav-mobile">
+<span class="mobile-section-label">Main</span>
+<a class="mobile-nav-item" href="index.html">Home</a>
+<a class="mobile-nav-item" href="basics.html">Basics</a>
+<a class="mobile-nav-item" href="forecasts.html">Predictions</a>
+<a class="mobile-nav-item" href="media.html">Media</a>
+<hr class="mobile-divider"/>
+<span class="mobile-section-label">Science Topics</span>
+<a class="mobile-nav-item" href="activeregions.html"><span class="nav-dot nav-dot--flare"></span> Active Regions</a>
+<a class="mobile-nav-item" href="flows.html"><span class="nav-dot nav-dot--blue"></span> Surface Flows</a>
+<a class="mobile-nav-item" href="giantcells.html"><span class="nav-dot nav-dot--blue"></span> Giant Cell Maps</a>
+<a class="mobile-nav-item" href="polarfields.html"><span class="nav-dot nav-dot--corona"></span> Polar Fields</a>
+<a class="mobile-nav-item" href="solarcycle.html"><span class="nav-dot nav-dot--gold"></span> Solar Cycles</a>
+<a class="mobile-nav-item" href="aft.html"><span class="nav-dot nav-dot--gold"></span> Advective Flux Transport</a>
+<a class="mobile-nav-item" href="baseline.html"><span class="nav-dot nav-dot--gold"></span> Baseline Maps</a>
+<hr class="mobile-divider"/>
+<span class="mobile-section-label">About</span>
+<a class="mobile-nav-item" href="people.html">People</a>
+<a class="mobile-nav-item" href="more.html">More Info</a>
+</nav>
+</header>
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+     END NaVIGaTION COMPONENT
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<!-- â”€â”€ DEMO PaGE CONTENT (remove from your pages) â”€â”€ -->
+<main class="demo-body">
+<p class="demo-note" style="font-size:0.7rem; letter-spacing:0.12em; text-transform:uppercase; color:#FF9a1F; margin-bottom:8px;">Component file</p>
+<h1 class="demo-title">Navigation Component</h1>
+<p class="demo-note">
+    This file contains the full navigation HTML, CSS, and JS.
+    To use it on your pages, copy the <code style="color:var(--gold)">&lt;header&gt;</code> block and the
+    <code style="color:var(--gold)">&lt;script&gt;</code> block into each page, and link
+    <code style="color:var(--gold)">solarcyclescience.css</code> in your <code style="color:var(--gold)">&lt;head&gt;</code>.
+  </p>
+<p class="demo-note">
+    To mark the current page as active, add <code style="color:var(--gold)">class="active"</code>
+    to the corresponding <code style="color:var(--gold)">&lt;a&gt;</code> tag in the nav.
+    Or use the auto-detection script below which matches by URL.
+  </p>
+<div class="demo-code"><span class="c">&lt;!-- 1. add to &lt;head&gt; --&gt;</span>
+<span class="t">&lt;link</span> <span class="s">rel</span>=<span class="a">"stylesheet"</span> <span class="s">href</span>=<span class="a">"/solarcyclescience.css"</span><span class="t">&gt;</span>
+<span class="c">&lt;!-- 2. Paste &lt;header&gt; block from nav.html --&gt;</span>
+<span class="c">&lt;!-- 3. add before &lt;/body&gt; --&gt;</span>
+<span class="t">&lt;script</span> <span class="s">src</span>=<span class="a">"/nav.js"</span><span class="t">&gt;&lt;/script&gt;</span></div>
+</main>
+<!-- â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+     NaVIGaTION JaVaSCRIPT
+     Save this as nav.js and link from each page
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• -->
+<script>
+(function () {
+  'use strict';
+  /* â”€â”€ active link detection â”€â”€ */
+  const currentPath = window.location.pathname.replace(/\/$/, '') || '/index.html';
+  document.querySelectorAll('.nav-links a, .mobile-nav-item').forEach(link => {
+    const href = link.getAttribute('href');
+    if (!href) return;
+    const linkPath = href.replace(/\/$/, '');
+    if (currentPath.endsWith(linkPath) || (currentPath === '/' && linkPath === '/index.html')) {
+      link.classList.add('active');
+    }
+  });
+  /* â”€â”€ Hamburger toggle â”€â”€ */
+  const hamburger = document.getElementById('nav-hamburger');
+  const mobileNav = document.getElementById('nav-mobile');
+  if (hamburger && mobileNav) {
+    hamburger.addEventListener('click', () => {
+      const isOpen = hamburger.classList.toggle('open');
+      mobileNav.classList.toggle('open', isOpen);
+      hamburger.setAttribute('aria-expanded', String(isOpen));
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+    /* Close mobile menu on link click */
+    mobileNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileNav.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+  }
+  /* â”€â”€ Desktop dropdowns â”€â”€ */
+  document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
+    const toggle = dropdown.querySelector('.nav-dropdown-toggle');
+    if (!toggle) return;
+    /* Keyboard accessibility */
+    toggle.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const isOpen = dropdown.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', String(isOpen));
+      }
+      if (e.key === 'Escape') {
+        dropdown.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.focus();
+      }
+    });
+    /* Close on outside click */
+    document.addEventListener('click', e => {
+      if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+  /* â”€â”€ Scroll reveal â”€â”€ */
+  const obs = new IntersectionObserver(
+    entries => entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        obs.unobserve(e.target);
+      }
+    }),
+    { threshold: 0.12 }
+  );
+  document.querySelectorAll('.reveal, .reveal-group').forEach(el => obs.observe(el));
+  /* â”€â”€ Nav shadow on scroll â”€â”€ */
+  const nav = document.querySelector('.site-nav');
+  if (nav) {
+    window.addEventListener('scroll', () => {
+      nav.style.borderBottomColor = window.scrollY > 10
+        ? 'rgba(255, 154, 31, 0.25)'
+        : 'rgba(255, 154, 31, 0.14)';
+    }, { passive: true });
+  }
+})();
+</script>
+</body>
+</html>

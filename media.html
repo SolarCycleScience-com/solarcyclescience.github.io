@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Solar Science Media  —  Solar Cycle Science</title>
+<meta content="Watch webinars, solar cycle animations, polar field reversals, and explore stunning photography of the 2017 Solar Eclipse by David Hathaway." name="description"/>
+<link href="bin/sun.ico" rel="icon"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;800&amp;family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&amp;display=swap" rel="stylesheet"/>
+<link href="solarcyclescience.css" rel="stylesheet"/>
+<style>
+    .media-card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 ratio */
+      height: 0;
+      overflow: hidden;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      background: #000;
+    }
+    .video-wrapper video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .eclipse-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .play-card {
+      transition: border-color var(--duration) var(--ease), background var(--duration) var(--ease), transform var(--duration) var(--ease) !important;
+    }
+    .play-card:hover {
+      border-color: var(--border-hover) !important;
+      background: var(--bg-raised) !important;
+      transform: translateY(-2px) !important;
+    }
+    .play-card:hover .play-overlay {
+      opacity: 1 !important;
+    }
+  </style>
+</head>
+<body>
+<!-- ── NAVIGATION ── -->
+<header>
+<nav aria-label="Main navigation" class="site-nav" role="navigation">
+<div class="nav-inner">
+<!-- Logo -->
+<a aria-label="Solar Cycle Science — Home" class="nav-logo" href="index.html" style="display:flex;align-items:center;gap:14px;text-decoration:none;">
+<img alt="Solar Cycle Science logo" aria-hidden="true" height="60" src="bin/BlueSun_small.jpg" style="flex-shrink:0;border-radius:50%;display:block;border:1.5px solid rgba(255, 154, 31, 0.35);box-shadow: 0 0 12px rgba(255, 154, 31, 0.25);" width="60"/>
+<span style="display:flex;flex-direction:column;gap:2px;">
+<span style="font-family:'Outfit',system-ui,sans-serif;font-weight:800;font-size:1.45rem;letter-spacing:0.02em;color:#FFD166;line-height:1.1;">Solar<span style="color:#FF9A1F;">Cycle</span>Science</span>
+<span style="font-family:'DM Sans',system-ui,sans-serif;font-size:0.78rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#3FA9F5;line-height:1;">Discover the Sun!</span>
+</span>
+</a>
+<!-- Desktop links -->
+<ul class="nav-links" id="nav-links">
+<li><a href="index.html">Home</a></li>
+<li><a href="basics.html">Basics</a></li>
+<li class="nav-dropdown" id="dropdown-science">
+<button aria-expanded="false" aria-haspopup="true" class="nav-dropdown-toggle">Science <span aria-hidden="true" class="chevron"></span></button>
+<ul class="nav-dropdown-menu" role="menu">
+<li role="menuitem"><a href="activeregions.html"><span class="nav-dot nav-dot--flare"></span>Active Regions</a></li>
+<li role="menuitem"><a href="flows.html"><span class="nav-dot nav-dot--blue"></span>Surface Flows</a></li>
+<li role="menuitem"><a href="giantcells.html"><span class="nav-dot nav-dot--blue"></span>Giant Cell Maps</a></li>
+<li role="menuitem"><a href="polarfields.html"><span class="nav-dot nav-dot--corona"></span>Polar Fields</a></li>
+<li role="menuitem"><a href="solarcycle.html"><span class="nav-dot nav-dot--gold"></span>Solar Cycles</a></li>
+<li role="menuitem"><a href="aft.html"><span class="nav-dot nav-dot--gold"></span>Advective Flux Transport</a></li>
+<li role="menuitem"><a href="baseline.html"><span class="nav-dot nav-dot--gold"></span>Baseline Maps</a></li>
+</ul>
+</li>
+<li><a href="forecasts.html">Predictions</a></li>
+<li><a href="media.html">Media</a></li>
+<li class="nav-dropdown" id="dropdown-about">
+<button aria-expanded="false" aria-haspopup="true" class="nav-dropdown-toggle">About <span aria-hidden="true" class="chevron"></span></button>
+<ul class="nav-dropdown-menu" role="menu">
+<li role="menuitem"><a href="people.html"><span class="nav-dot nav-dot--corona"></span>People</a></li>
+<li role="menuitem"><a href="more.html"><span class="nav-dot nav-dot--gold"></span>More Info</a></li>
+</ul>
+</li>
+<li><a class="nav-cta" href="forecasts.html">Latest Forecasts</a></li>
+</ul>
+<!-- ── Hamburger ── -->
+<button aria-expanded="false" aria-label="Toggle menu" class="nav-hamburger" id="nav-hamburger">
+<span></span><span></span><span></span>
+</button>
+</div>
+</nav>
+<!-- Mobile slide-out menu -->
+<nav aria-label="Mobile navigation" class="nav-mobile-overlay" id="nav-mobile">
+<span class="mobile-section-label">Main</span>
+<a class="mobile-nav-item" href="index.html">Home</a>
+<a class="mobile-nav-item" href="basics.html">Basics</a>
+<a class="mobile-nav-item" href="forecasts.html">Predictions</a>
+<a class="mobile-nav-item" href="media.html">Media</a>
+<hr class="mobile-divider"/>
+<span class="mobile-section-label">Science Topics</span>
+<a class="mobile-nav-item" href="activeregions.html"><span class="nav-dot nav-dot--flare"></span> Active Regions</a>
+<a class="mobile-nav-item" href="flows.html"><span class="nav-dot nav-dot--blue"></span> Surface Flows</a>
+<a class="mobile-nav-item" href="giantcells.html"><span class="nav-dot nav-dot--blue"></span> Giant Cell Maps</a>
+<a class="mobile-nav-item" href="polarfields.html"><span class="nav-dot nav-dot--corona"></span> Polar Fields</a>
+<a class="mobile-nav-item" href="solarcycle.html"><span class="nav-dot nav-dot--gold"></span> Solar Cycles</a>
+<a class="mobile-nav-item" href="aft.html"><span class="nav-dot nav-dot--gold"></span> Advective Flux Transport</a>
+<a class="mobile-nav-item" href="baseline.html"><span class="nav-dot nav-dot--gold"></span> Baseline Maps</a>
+<hr class="mobile-divider"/>
+<span class="mobile-section-label">About</span>
+<a class="mobile-nav-item" href="people.html">People</a>
+<a class="mobile-nav-item" href="more.html">More Info</a>
+</nav>
+</header>
+<main>
+<!-- ── INTRO ── -->
+<section class="section" style="padding-bottom: 0;">
+<div class="container">
+<p class="eyebrow">Solar Gallery</p>
+<h1>Science Media &amp; Videos</h1>
+<p class="lead">
+        Explore scientific webinars, simulations of photospheric transport, polar field animations, and solar eclipse photography.
+      </p>
+<!-- YouTube Channel Link Card -->
+<div class="card card--blue reveal-group" style="margin-top: 2rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap;">
+<div>
+<h3 style="color: var(--corona); margin-bottom: 0.5rem;">Official YouTube Channel</h3>
+<p style="font-size: 0.9rem; margin-bottom: 0; max-width: 65ch; color: var(--text-secondary);">
+            Subscribe to our YouTube channel for animations of active regions, polar field reversals, and the complete archive of AFT Baseline simulation movies. You can also view our featured playlists of public talks and solar science briefings.
+          </p>
+</div>
+<div class="btn-row">
+<a class="btn btn-primary" href="https://www.youtube.com/@SolarCycleScience?app=desktop" rel="noopener noreferrer" target="_blank">Visit YouTube Channel ↗</a>
+<a class="btn btn-secondary" href="https://www.youtube.com/playlist?list=PL3jqJBNP9l7iVnsukST_HrsDM_FaHebKF" rel="noopener noreferrer" target="_blank">View Carruthers Mission Playlist ↗</a>
+</div>
+</div>
+</div>
+</section>
+<!-- animations & Videos Section -->
+<section class="section">
+<div class="container">
+<hr class="divider" style="margin-top: 0; margin-bottom: 3rem;"/>
+<h2>Simulations &amp; Field Reversals</h2>
+<div class="media-card-grid reveal-group">
+<!-- AFT Baseline -->
+<div class="card">
+<div class="video-wrapper" style="margin-bottom: 1rem;">
+<video controls="" preload="metadata">
+<source src="bin/AFT_Baseline_2015.mp4" type="video/mp4"/>
+</video>
+</div>
+<h4 style="color: var(--corona);">AFT Baseline (2015)</h4>
+<p style="font-size: 0.85rem;">
+            This video demonstrates the evolution of the Sun's magnetic field following the Solar Cycle 24 maximum. AFT assimilates active regions and advects magnetic flux using observed surface currents.
+          </p>
+</div>
+<!-- North Pole Reversal -->
+<div class="card">
+<div class="video-wrapper" style="margin-bottom: 1rem;">
+<video controls="" preload="metadata">
+<source src="bin/NorthPole_2013.mp4" type="video/mp4"/>
+</video>
+</div>
+<h4 style="color: var(--corona);">North Pole Reversal (2013)</h4>
+<p style="font-size: 0.85rem;">
+            Solar Cycle 24 northern polar reversal. The video illustrates that the "triple reversal" was not multiple true reversals, but rather a single reversal in late 2013 with lingering poleward flux streams.
+          </p>
+</div>
+<!-- South Pole Reversal -->
+<div class="card">
+<div class="video-wrapper" style="margin-bottom: 1rem;">
+<video controls="" preload="metadata">
+<source src="bin/SouthPole_2014.mp4" type="video/mp4"/>
+</video>
+</div>
+<h4 style="color: var(--corona);">South Pole Reversal (2014)</h4>
+<p style="font-size: 0.85rem;">
+            Southern polar reversal mapping. The movie illustrates the persistence and stability of the Sun's active longitudes over the southern polar cap as the HMI data assimilation progresses.
+          </p>
+</div>
+</div>
+<!-- Giant Cells streams and card -->
+<div class="card card--blue reveal-group" style="margin-top: 2.5rem; display: grid; grid-template-columns: 1.2fr 1fr; gap: 2.5rem; align-items: center;">
+<div>
+<h4 style="color: var(--corona); margin-bottom: 0.5rem;">Giant Cell Flow Streams</h4>
+<p style="font-size: 0.9rem; margin-bottom: 1rem;">
+            This movie overlays daily flow streamlines onto radial vorticity maps, showing views from the equator and the North Pole.
+          </p>
+<a class="btn btn-secondary" download="" href="bin/GiantSolarVorticies.mp4" style="font-size: 0.72rem; padding: 8px 16px;">Download Flow Movie (423 MB)</a>
+</div>
+<div class="img-frame">
+<img alt="Giant Cell Flow Streamlines Map" src="bin/GiantCellFlows20100701.00.png"/>
+</div>
+</div>
+<div class="divider" style="margin-block: 4rem;"></div>
+<h2>AFT Baseline Annual Movies</h2>
+<p style="margin-bottom: 2rem; color: var(--text-secondary);">
+        Browse the complete collection of annual simulation movies generated by the Advective Flux Transport (AFT) model. These animations trace the daily evolution of the Sun's magnetic field over the last decade and a half.
+      </p>
+<div class="reveal-group" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+<!-- 2024 -->
+<a class="card play-card" href="https://www.youtube.com/watch?v=oB4O5cM_hPk" rel="noopener noreferrer" style="padding: 1rem; text-decoration: none; display: flex; flex-direction: column; gap: 0.75rem; border-color: var(--border-blue);" target="_blank">
+<div class="img-frame" style="position: relative; aspect-ratio: 16/9; background: #000;">
+<img alt="AFT Baseline Movie 2024" src="https://img.youtube.com/vi/oB4O5cM_hPk/mqdefault.jpg" style="width: 100%; height: 100%; object-fit: cover;"/>
+<div class="play-overlay" style="position: absolute; inset: 0; background: rgba(0,0,0,0.45); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.28s;">
+<span style="font-size: 1.8rem; color: var(--gold);">▶</span>
+</div>
+</div>
+<div style="display: flex; justify-content: space-between; align-items: center;">
+<span style="font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; color: var(--corona);">2024</span>
+<span style="font-size: 0.72rem; color: var(--text-tertiary);">Simulation Movie</span>
+</div>
+</a>
+<!-- 2023 -->
+<a class="card play-card" href="https://www.youtube.com/watch?v=UzlcLyc17A0" rel="noopener noreferrer" style="padding: 1rem; text-decoration: none; display: flex; flex-direction: column; gap: 0.75rem; border-color: var(--border-blue);" target="_blank">
+<div class="img-frame" style="position: relative; aspect-ratio: 16/9; background: #000;">
+<img alt="AFT Baseline Movie 2023" src="https://img.youtube.com/vi/UzlcLyc17A0/mqdefault.jpg" style="width: 100%; height: 100%; object-fit: cover;"/>
+<div class="play-overlay" style="position: absolute; inset: 0; background: rgba(0,0,0,0.45); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.28s;">
+<span style="font-size: 1.8rem; color: var(--gold);">▶</span>
+</div>
+</div>
+<div style="display: flex; justify-content: space-between; align-items: center;">
+<span style="font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; color: var(--corona);">2023</span>
+<span style="font-size: 0.72rem; color: var(--text-tertiary);">Simulation Movie</span>
+</div>
+</a>
+<!-- 2022 -->
+<a class="card play-card" href="https://www.youtube.com/watch?v=Z4mKBqfuFxU" rel="noopener noreferrer" style="padding: 1rem; text-decoration: none; display: flex; flex-direction: column; gap: 0.75rem; border-color: var(--border-blue);" target="_blank">
+<div class="img-frame" style="position: relative; aspect-ratio: 16/9; background: #000;">
+<img alt="AFT Baseline Movie 2022" src="https://img.youtube.com/vi/Z4mKBqfuFxU/mqdefault.jpg" style="width: 100%; height: 100%; object-fit: cover;"/>
+<div class="play-overlay" style="position: absolute; inset: 0; background: rgba(0,0,0,0.45); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.28s;">
+<span style="font-size: 1.8rem; color: var(--gold);">▶</span>
+</div>
+</div>
+<div style="display: flex; justify-content: space-between; align-items: center;">
+<span style="font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; color: var(--corona);">2022</span>
+<span style="font-size: 0.72rem; color: var(--text-tertiary);">Simulation Movie</span>
+</div>
+</a>
+<!-- 2021 -->
+<a class="card play-card" href="https://www.youtube.com/watch?v=OA71G01lGjs" rel="noopener noreferrer" style="padding: 1rem; text-decoration: none; display: flex; flex-direction: column; gap: 0.75rem; border-color: var(--border-blue);" target="_blank">
+<div class="img-frame" style="position: relative; aspect-ratio: 16/9; background: #000;">
+<img alt="AFT Baseline Movie 2021" src="https://img.youtube.com/vi/OA71G01lGjs/mqdefault.jpg" style="width: 100%; height: 100%; object-fit: cover;"/>
+<div class="play-overlay" style="position: absolute; inset: 0; background: rgba(0,0,0,0.45); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.28s;">
+<span style="font-size: 1.8rem; color: var(--gold);">▶</span>
+</div>
+</div>
+<div style="display: flex; justify-content: space-between; align-items: center;">
+<span style="font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; color: var(--corona);">2021</span>
+<span style="font-size: 0.72rem; color: var(--text-tertiary);">Simulation Movie</span>
+</div>
+</a>
+<!-- 2020 -->
+<a class="card play-card" href="https://www.youtube.com/watch?v=JVXb2LkfI-A" rel="noopener noreferrer" style="padding: 1rem; text-decoration: none; display: flex; flex-direction: column; gap: 0.75rem; border-color: var(--border-blue);" target="_blank">
+<div class="img-frame" style="position: relative; aspect-ratio: 16/9; background: #000;">
+<img alt="AFT Baseline Movie 2020" src="https://img.youtube.com/vi/JVXb2LkfI-A/mqdefault.jpg" style="width: 100%; height: 100%; object-fit: cover;"/>
+<div class="play-overlay" style="position: absolute; inset: 0; background: rgba(0,0,0,0.45); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.28s;">
+<span style="font-size: 1.8rem; color: var(--gold);">▶</span>
+</div>
+</div>
+<div style="display: flex; justify-content: space-between; align-items: center;">
+<span style="font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; color: var(--corona);">2020</span>
+<span style="font-size: 0.72rem; color: var(--text-tertiary);">Simulation Movie</span>
+</div>
+</a>
+<!-- 2019 -->
+<a class="card play-card" href="https://www.youtube.com/watch?v=_gSd58BfCy4" rel="noopener noreferrer" style="padding: 1rem; text-decoration: none; display: flex; flex-direction: column; gap: 0.75rem; border-color: var(--border-blue);" target="_blank">
+<div class="img-frame" style="position: relative; aspect-ratio: 16/9; background: #000;">
+<img alt="AFT Baseline Movie 2019" src="https://img.youtube.com/vi/_gSd58BfCy4/mqdefault.jpg" style="width: 100%; height: 100%; object-fit: cover;"/>
+<div class="play-overlay" style="position: absolute; inset: 0; background: rgba(0,0,0,0.45); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.28s;">
+<span style="font-size: 1.8rem; color: var(--gold);">▶</span>
+</div>
+</div>
+<div style="display: flex; justify-content: space-between; align-items: center;">
+<span style="font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; color: var(--corona);">2019</span>
+<span style="font-size: 0.72rem; color: var(--text-tertiary);">Simulation Movie</span>
+</div>
+</a>
+<!-- 2018 -->
+<a class="card play-card" href="https://www.youtube.com/watch?v=SJbCZ6vxN1Y" rel="noopener noreferrer" style="padding: 1rem; text-decoration: none; display: flex; flex-direction: column; gap: 0.75rem; border-color: var(--border-blue);" target="_blank">
+<div class="img-frame" style="position: relative; aspect-ratio: 16/9; background: #000;">
+<img alt="AFT Baseline Movie 2018" src="https://img.youtube.com/vi/SJbCZ6vxN1Y/mqdefault.jpg" style="width: 100%; height: 100%; object-fit: cover;"/>
+<div class="play-overlay" style="position: absolute; inset: 0; background: rgba(0,0,0,0.45); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.28s;">
+<span style="font-size: 1.8rem; color: var(--gold);">▶</span>
+</div>
+</div>
+<div style="display: flex; justify-content: space-between; align-items: center;">
+<span style="font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; color: var(--corona);">2018</span>
+<span style="font-size: 0.72rem; color: var(--text-tertiary);">Simulation Movie</span>
+</div>
+</a>
+<!-- 2017 -->
+<a class="card play-card" href="https://www.youtube.com/watch?v=qxJ-HCQCXZI" rel="noopener noreferrer" style="padding: 1rem; text-decoration: none; display: flex; flex-direction: column; gap: 0.75rem; border-color: var(--border-blue);" target="_blank">
+<div class="img-frame" style="position: relative; aspect-ratio: 16/9; background: #000;">
+<img alt="AFT Baseline Movie 2017" src="https://img.youtube.com/vi/qxJ-HCQCXZI/mqdefault.jpg" style="width: 100%; height: 100%; object-fit: cover;"/>
+<div class="play-overlay" style="position: absolute; inset: 0; background: rgba(0,0,0,0.45); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.28s;">
+<span style="font-size: 1.8rem; color: var(--gold);">▶</span>
+</div>
+</div>
+<div style="display: flex; justify-content: space-between; align-items: center;">
+<span style="font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; color: var(--corona);">2017</span>
+<span style="font-size: 0.72rem; color: var(--text-tertiary);">Simulation Movie</span>
+</div>
+</a>
+<!-- 2016 -->
+<a class="card play-card" href="https://www.youtube.com/watch?v=9-p0pQO5hrs" rel="noopener noreferrer" style="padding: 1rem; text-decoration: none; display: flex; flex-direction: column; gap: 0.75rem; border-color: var(--border-blue);" target="_blank">
+<div class="img-frame" style="position: relative; aspect-ratio: 16/9; background: #000;">
+<img alt="AFT Baseline Movie 2016" src="https://img.youtube.com/vi/9-p0pQO5hrs/mqdefault.jpg" style="width: 100%; height: 100%; object-fit: cover;"/>
+<div class="play-overlay" style="position: absolute; inset: 0; background: rgba(0,0,0,0.45); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.28s;">
+<span style="font-size: 1.8rem; color: var(--gold);">▶</span>
+</div>
+</div>
+<div style="display: flex; justify-content: space-between; align-items: center;">
+<span style="font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; color: var(--corona);">2016</span>
+<span style="font-size: 0.72rem; color: var(--text-tertiary);">Simulation Movie</span>
+</div>
+</a>
+<!-- 2015 -->
+<a class="card play-card" href="https://www.youtube.com/watch?v=PWh0rPOoo2E" rel="noopener noreferrer" style="padding: 1rem; text-decoration: none; display: flex; flex-direction: column; gap: 0.75rem; border-color: var(--border-blue);" target="_blank">
+<div class="img-frame" style="position: relative; aspect-ratio: 16/9; background: #000;">
+<img alt="AFT Baseline Movie 2015" src="https://img.youtube.com/vi/PWh0rPOoo2E/mqdefault.jpg" style="width: 100%; height: 100%; object-fit: cover;"/>
+<div class="play-overlay" style="position: absolute; inset: 0; background: rgba(0,0,0,0.45); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.28s;">
+<span style="font-size: 1.8rem; color: var(--gold);">▶</span>
+</div>
+</div>
+<div style="display: flex; justify-content: space-between; align-items: center;">
+<span style="font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; color: var(--corona);">2015</span>
+<span style="font-size: 0.72rem; color: var(--text-tertiary);">Simulation Movie</span>
+</div>
+</a>
+<!-- 2014 -->
+<a class="card play-card" href="https://www.youtube.com/watch?v=BmpxdgT0ufU" rel="noopener noreferrer" style="padding: 1rem; text-decoration: none; display: flex; flex-direction: column; gap: 0.75rem; border-color: var(--border-blue);" target="_blank">
+<div class="img-frame" style="position: relative; aspect-ratio: 16/9; background: #000;">
+<img alt="AFT Baseline Movie 2014" src="https://img.youtube.com/vi/BmpxdgT0ufU/mqdefault.jpg" style="width: 100%; height: 100%; object-fit: cover;"/>
+<div class="play-overlay" style="position: absolute; inset: 0; background: rgba(0,0,0,0.45); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.28s;">
+<span style="font-size: 1.8rem; color: var(--gold);">▶</span>
+</div>
+</div>
+<div style="display: flex; justify-content: space-between; align-items: center;">
+<span style="font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; color: var(--corona);">2014</span>
+<span style="font-size: 0.72rem; color: var(--text-tertiary);">Simulation Movie</span>
+</div>
+</a>
+<!-- 2013 -->
+<a class="card play-card" href="https://www.youtube.com/watch?v=aU30yAQHb0o" rel="noopener noreferrer" style="padding: 1rem; text-decoration: none; display: flex; flex-direction: column; gap: 0.75rem; border-color: var(--border-blue);" target="_blank">
+<div class="img-frame" style="position: relative; aspect-ratio: 16/9; background: #000;">
+<img alt="AFT Baseline Movie 2013" src="https://img.youtube.com/vi/aU30yAQHb0o/mqdefault.jpg" style="width: 100%; height: 100%; object-fit: cover;"/>
+<div class="play-overlay" style="position: absolute; inset: 0; background: rgba(0,0,0,0.45); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.28s;">
+<span style="font-size: 1.8rem; color: var(--gold);">▶</span>
+</div>
+</div>
+<div style="display: flex; justify-content: space-between; align-items: center;">
+<span style="font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; color: var(--corona);">2013</span>
+<span style="font-size: 0.72rem; color: var(--text-tertiary);">Simulation Movie</span>
+</div>
+</a>
+<!-- 2012 -->
+<a class="card play-card" href="https://www.youtube.com/watch?v=ih2RIFHZHdE" rel="noopener noreferrer" style="padding: 1rem; text-decoration: none; display: flex; flex-direction: column; gap: 0.75rem; border-color: var(--border-blue);" target="_blank">
+<div class="img-frame" style="position: relative; aspect-ratio: 16/9; background: #000;">
+<img alt="AFT Baseline Movie 2012" src="https://img.youtube.com/vi/ih2RIFHZHdE/mqdefault.jpg" style="width: 100%; height: 100%; object-fit: cover;"/>
+<div class="play-overlay" style="position: absolute; inset: 0; background: rgba(0,0,0,0.45); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.28s;">
+<span style="font-size: 1.8rem; color: var(--gold);">▶</span>
+</div>
+</div>
+<div style="display: flex; justify-content: space-between; align-items: center;">
+<span style="font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; color: var(--corona);">2012</span>
+<span style="font-size: 0.72rem; color: var(--text-tertiary);">Simulation Movie</span>
+</div>
+</a>
+<!-- 2011 -->
+<a class="card play-card" href="https://www.youtube.com/watch?v=9vXHCK1VR1M" rel="noopener noreferrer" style="padding: 1rem; text-decoration: none; display: flex; flex-direction: column; gap: 0.75rem; border-color: var(--border-blue);" target="_blank">
+<div class="img-frame" style="position: relative; aspect-ratio: 16/9; background: #000;">
+<img alt="AFT Baseline Movie 2011" src="https://img.youtube.com/vi/9vXHCK1VR1M/mqdefault.jpg" style="width: 100%; height: 100%; object-fit: cover;"/>
+<div class="play-overlay" style="position: absolute; inset: 0; background: rgba(0,0,0,0.45); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.28s;">
+<span style="font-size: 1.8rem; color: var(--gold);">▶</span>
+</div>
+</div>
+<div style="display: flex; justify-content: space-between; align-items: center;">
+<span style="font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; color: var(--corona);">2011</span>
+<span style="font-size: 0.72rem; color: var(--text-tertiary);">Simulation Movie</span>
+</div>
+</a>
+<!-- 2010 -->
+<a class="card play-card" href="https://www.youtube.com/watch?v=p0yuwDudw0w" rel="noopener noreferrer" style="padding: 1rem; text-decoration: none; display: flex; flex-direction: column; gap: 0.75rem; border-color: var(--border-blue);" target="_blank">
+<div class="img-frame" style="position: relative; aspect-ratio: 16/9; background: #000;">
+<img alt="AFT Baseline Movie 2010" src="https://img.youtube.com/vi/p0yuwDudw0w/mqdefault.jpg" style="width: 100%; height: 100%; object-fit: cover;"/>
+<div class="play-overlay" style="position: absolute; inset: 0; background: rgba(0,0,0,0.45); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.28s;">
+<span style="font-size: 1.8rem; color: var(--gold);">▶</span>
+</div>
+</div>
+<div style="display: flex; justify-content: space-between; align-items: center;">
+<span style="font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; color: var(--corona);">2010</span>
+<span style="font-size: 0.72rem; color: var(--text-tertiary);">Simulation Movie</span>
+</div>
+</a>
+</div>
+</div>
+</section>
+<!-- Public Talks & Science Briefings Section -->
+<section class="section" style="border-top: 1px solid var(--border);">
+<div class="container">
+<h2>Public Talks &amp; Science Briefings</h2>
+<p style="margin-bottom: 2rem; color: var(--text-secondary);">
+        Watch featured presentations, interviews, and educational briefings detailing the science of Solar Cycle 25, space weather observations, and the AFT modeling framework.
+      </p>
+<div class="reveal-group" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2rem;">
+<!-- Webinar Talk -->
+<a class="card play-card" href="https://www.youtube.com/watch?v=FO7mnD3uwUk" rel="noopener noreferrer" style="text-decoration: none; display: flex; flex-direction: column; gap: 1rem; border-color: var(--border-blue);" target="_blank">
+<div class="img-frame" style="position: relative; aspect-ratio: 16/9; background: #000;">
+<img alt="Sunspots, Space Weather, and Climate Change" src="https://img.youtube.com/vi/FO7mnD3uwUk/mqdefault.jpg" style="width: 100%; height: 100%; object-fit: cover;"/>
+<div class="play-overlay" style="position: absolute; inset: 0; background: rgba(0,0,0,0.45); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.28s;">
+<span style="font-size: 2rem; color: var(--gold);">▶</span>
+</div>
+</div>
+<h4 style="color: var(--corona); font-size: 0.95rem; margin-bottom: 4px; line-height: 1.3;">Sunspots, Space Weather, and Climate Change</h4>
+<p style="font-size: 0.78rem; color: var(--text-tertiary); margin: 0;">Educational Webinar • Dr. David Hathaway</p>
+</a>
+<!-- Dr. Jha Talk -->
+<a class="card play-card" href="https://www.youtube.com/watch?v=vS6odYGaamk" rel="noopener noreferrer" style="text-decoration: none; display: flex; flex-direction: column; gap: 1rem; border-color: var(--border-blue);" target="_blank">
+<div class="img-frame" style="position: relative; aspect-ratio: 16/9; background: #000;">
+<img alt="IAUGA2022 | Bibhuti K Jha | Signature of Tilt Quenching" src="https://img.youtube.com/vi/vS6odYGaamk/mqdefault.jpg" style="width: 100%; height: 100%; object-fit: cover;"/>
+<div class="play-overlay" style="position: absolute; inset: 0; background: rgba(0,0,0,0.45); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.28s;">
+<span style="font-size: 2rem; color: var(--gold);">▶</span>
+</div>
+</div>
+<h4 style="color: var(--corona); font-size: 0.95rem; margin-bottom: 4px; line-height: 1.3;">Signature of Tilt Quenching from Observation of Tilted BMRs on the Sun</h4>
+<p style="font-size: 0.78rem; color: var(--text-tertiary); margin: 0;">IAUGA 2022 • Dr. Bibhuti K. Jha</p>
+</a>
+<!-- Axisymmetric Flows Talk -->
+<a class="card play-card" href="https://www.youtube.com/watch?v=618XjYJcgks" rel="noopener noreferrer" style="text-decoration: none; display: flex; flex-direction: column; gap: 1rem; border-color: var(--border-blue);" target="_blank">
+<div class="img-frame" style="position: relative; aspect-ratio: 16/9; background: #000;">
+<img alt="Axisymmetric Flows in Solar Cycle 24" src="https://img.youtube.com/vi/618XjYJcgks/mqdefault.jpg" style="width: 100%; height: 100%; object-fit: cover;"/>
+<div class="play-overlay" style="position: absolute; inset: 0; background: rgba(0,0,0,0.45); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.28s;">
+<span style="font-size: 2rem; color: var(--gold);">▶</span>
+</div>
+</div>
+<h4 style="color: var(--corona); font-size: 0.95rem; margin-bottom: 4px; line-height: 1.3;">Pattern Tracking of SDO Data: Axisymmetric Flows in Solar Cycle 24</h4>
+<p style="font-size: 0.78rem; color: var(--text-tertiary); margin: 0;">Solar Physics Talk • Dr. David Hathaway</p>
+</a>
+<!-- Talk 1 -->
+<a class="card play-card" href="https://www.youtube.com/watch?v=XcgONz9vo0I" rel="noopener noreferrer" style="text-decoration: none; display: flex; flex-direction: column; gap: 1rem; border-color: var(--border-blue);" target="_blank">
+<div class="img-frame" style="position: relative; aspect-ratio: 16/9; background: #000;">
+<img alt="WAS March 2026 Talk" src="https://img.youtube.com/vi/XcgONz9vo0I/mqdefault.jpg" style="width: 100%; height: 100%; object-fit: cover;"/>
+<div class="play-overlay" style="position: absolute; inset: 0; background: rgba(0,0,0,0.45); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.28s;">
+<span style="font-size: 2rem; color: var(--gold);">▶</span>
+</div>
+</div>
+<h4 style="color: var(--corona); font-size: 0.95rem; margin-bottom: 4px; line-height: 1.3;">Solar Cycle 25: What We Predicted — and What We Have Learned</h4>
+<p style="font-size: 0.78rem; color: var(--text-tertiary); margin: 0;">WAS March 2026 • Dr. Lisa Upton</p>
+</a>
+<!-- Talk 2 -->
+<a class="card play-card" href="https://www.youtube.com/watch?v=coTXQZBSN2E" rel="noopener noreferrer" style="text-decoration: none; display: flex; flex-direction: column; gap: 1rem; border-color: var(--border-blue);" target="_blank">
+<div class="img-frame" style="position: relative; aspect-ratio: 16/9; background: #000;">
+<img alt="WAS March 2024 Talk" src="https://img.youtube.com/vi/coTXQZBSN2E/mqdefault.jpg" style="width: 100%; height: 100%; object-fit: cover;"/>
+<div class="play-overlay" style="position: absolute; inset: 0; background: rgba(0,0,0,0.45); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.28s;">
+<span style="font-size: 2rem; color: var(--gold);">▶</span>
+</div>
+</div>
+<h4 style="color: var(--corona); font-size: 0.95rem; margin-bottom: 4px; line-height: 1.3;">Cycle 25 &amp; NASA's Heliophysics Big Year</h4>
+<p style="font-size: 0.78rem; color: var(--text-tertiary); margin: 0;">WAS March 2024 • Dr. Lisa Upton</p>
+</a>
+<!-- Talk 3 -->
+<a class="card play-card" href="https://www.youtube.com/watch?v=HBUXln7qdoo" rel="noopener noreferrer" style="text-decoration: none; display: flex; flex-direction: column; gap: 1rem; border-color: var(--border-blue);" target="_blank">
+<div class="img-frame" style="position: relative; aspect-ratio: 16/9; background: #000;">
+<img alt="Solar Cycle Predictions (Part One)" src="https://img.youtube.com/vi/HBUXln7qdoo/mqdefault.jpg" style="width: 100%; height: 100%; object-fit: cover;"/>
+<div class="play-overlay" style="position: absolute; inset: 0; background: rgba(0,0,0,0.45); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.28s;">
+<span style="font-size: 2rem; color: var(--gold);">▶</span>
+</div>
+</div>
+<h4 style="color: var(--corona); font-size: 0.95rem; margin-bottom: 4px; line-height: 1.3;">Solar Cycle Predictions (Part One)</h4>
+<p style="font-size: 0.78rem; color: var(--text-tertiary); margin: 0;">Scientific Briefing • Dr. Lisa Upton</p>
+</a>
+<!-- Talk 4 -->
+<a class="card play-card" href="https://www.youtube.com/watch?v=mhRRlNEY3hA" rel="noopener noreferrer" style="text-decoration: none; display: flex; flex-direction: column; gap: 1rem; border-color: var(--border-blue);" target="_blank">
+<div class="img-frame" style="position: relative; aspect-ratio: 16/9; background: #000;">
+<img alt="WAS April 2021 Talk" src="https://img.youtube.com/vi/mhRRlNEY3hA/mqdefault.jpg" style="width: 100%; height: 100%; object-fit: cover;"/>
+<div class="play-overlay" style="position: absolute; inset: 0; background: rgba(0,0,0,0.45); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.28s;">
+<span style="font-size: 2rem; color: var(--gold);">▶</span>
+</div>
+</div>
+<h4 style="color: var(--corona); font-size: 0.95rem; margin-bottom: 4px; line-height: 1.3;">The Sun, Space Weather and the Solar Activity Cycle</h4>
+<p style="font-size: 0.78rem; color: var(--text-tertiary); margin: 0;">WAS April 2021 • Dr. Lisa Upton</p>
+</a>
+<!-- Talk 5 -->
+<a class="card play-card" href="https://www.youtube.com/watch?v=FRABcZe6syk" rel="noopener noreferrer" style="text-decoration: none; display: flex; flex-direction: column; gap: 1rem; border-color: var(--border-blue);" target="_blank">
+<div class="img-frame" style="position: relative; aspect-ratio: 16/9; background: #000;">
+<img alt="HAO Presentation" src="https://img.youtube.com/vi/FRABcZe6syk/mqdefault.jpg" style="width: 100%; height: 100%; object-fit: cover;"/>
+<div class="play-overlay" style="position: absolute; inset: 0; background: rgba(0,0,0,0.45); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.28s;">
+<span style="font-size: 2rem; color: var(--gold);">▶</span>
+</div>
+</div>
+<h4 style="color: var(--corona); font-size: 0.95rem; margin-bottom: 4px; line-height: 1.3;">Advective Flux Transport Model: Improving Predictions</h4>
+<p style="font-size: 0.78rem; color: var(--text-tertiary); margin: 0;">HAO Colloquium • Dr. Lisa Upton</p>
+</a>
+<!-- Playlist Talk 1 -->
+<a class="card play-card" href="https://www.youtube.com/watch?v=xjcPclYmHEM" rel="noopener noreferrer" style="text-decoration: none; display: flex; flex-direction: column; gap: 1rem; border-color: var(--border-blue);" target="_blank">
+<div class="img-frame" style="position: relative; aspect-ratio: 16/9; background: #000;">
+<img alt="Meet Dr. Lisa Upton" src="https://img.youtube.com/vi/xjcPclYmHEM/mqdefault.jpg" style="width: 100%; height: 100%; object-fit: cover;"/>
+<div class="play-overlay" style="position: absolute; inset: 0; background: rgba(0,0,0,0.45); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.28s;">
+<span style="font-size: 2rem; color: var(--gold);">▶</span>
+</div>
+</div>
+<h4 style="color: var(--corona); font-size: 0.95rem; margin-bottom: 4px; line-height: 1.3;">Meet Dr. Lisa Upton — Sun Scientist</h4>
+<p style="font-size: 0.78rem; color: var(--text-tertiary); margin: 0;">Profile Video • NASA Carruthers</p>
+</a>
+<!-- Playlist Talk 2 -->
+<a class="card play-card" href="https://www.youtube.com/watch?v=BAmJaVXGmA0" rel="noopener noreferrer" style="text-decoration: none; display: flex; flex-direction: column; gap: 1rem; border-color: var(--border-blue);" target="_blank">
+<div class="img-frame" style="position: relative; aspect-ratio: 16/9; background: #000;">
+<img alt="Why Scientists Study Space Weather" src="https://img.youtube.com/vi/BAmJaVXGmA0/mqdefault.jpg" style="width: 100%; height: 100%; object-fit: cover;"/>
+<div class="play-overlay" style="position: absolute; inset: 0; background: rgba(0,0,0,0.45); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.28s;">
+<span style="font-size: 2rem; color: var(--gold);">▶</span>
+</div>
+</div>
+<h4 style="color: var(--corona); font-size: 0.95rem; margin-bottom: 4px; line-height: 1.3;">Why Scientists Study Space Weather</h4>
+<p style="font-size: 0.78rem; color: var(--text-tertiary); margin: 0;">Science Objectives • NASA Carruthers Mission</p>
+</a>
+<!-- Playlist Talk 3 -->
+<a class="card play-card" href="https://www.youtube.com/watch?v=WDmvFN0Djpg" rel="noopener noreferrer" style="text-decoration: none; display: flex; flex-direction: column; gap: 1rem; border-color: var(--border-blue);" target="_blank">
+<div class="img-frame" style="position: relative; aspect-ratio: 16/9; background: #000;">
+<img alt="Top Three Skills | Advice for Young Scientists" src="https://img.youtube.com/vi/WDmvFN0Djpg/mqdefault.jpg" style="width: 100%; height: 100%; object-fit: cover;"/>
+<div class="play-overlay" style="position: absolute; inset: 0; background: rgba(0,0,0,0.45); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.28s;">
+<span style="font-size: 2rem; color: var(--gold);">▶</span>
+</div>
+</div>
+<h4 style="color: var(--corona); font-size: 0.95rem; margin-bottom: 4px; line-height: 1.3;">Top Three Skills | Advice for Young Scientists</h4>
+<p style="font-size: 0.78rem; color: var(--text-tertiary); margin: 0;">Career Advice • NASA Carruthers Mission</p>
+</a>
+</div>
+</div>
+</section>
+<!-- Eclipse 2017 Section -->
+<section class="section" style="background: #080D1C; border-top: 1px solid rgba(255,154,31,0.08);">
+<div class="container">
+<h2 id="eclipse">The 2017 Solar Eclipse</h2>
+<p>
+        In Salem, Oregon, Dr. David Hathaway captured the beautiful corona configurations of the August 21, 2017 Total Solar Eclipse. 
+        These images were taken using a digital SLR camera with a 400mm lens at f/8, ISO 400.
+      </p>
+<div class="eclipse-gallery reveal-group">
+<div class="card">
+<div class="img-frame">
+<img alt="Eclipse Short Exposure stack" src="bin/Eclipse_0094short.jpg"/>
+</div>
+<p class="caption" style="margin-top: 10px; margin-bottom: 0;">
+<strong>Short Exposure:</strong> Stack of 1/2000s, 1/500s, 1/125s, and 1/30s exposures.
+          </p>
+</div>
+<div class="card">
+<div class="img-frame">
+<img alt="Eclipse Medium Exposure stack" src="bin/Eclipse_0094medium.jpg"/>
+</div>
+<p class="caption" style="margin-top: 10px; margin-bottom: 0;">
+<strong>Medium Exposure:</strong> Stack including a 1/8s exposure, revealing mid-corona structures.
+          </p>
+</div>
+<div class="card">
+<div class="img-frame">
+<img alt="Eclipse Long Exposure stack" src="bin/Eclipse_0094long.jpg"/>
+</div>
+<p class="caption" style="margin-top: 10px; margin-bottom: 0;">
+<strong>Long Exposure:</strong> Stack up to 1/2s, highlighting the outer coronal streams.
+          </p>
+</div>
+<div class="card">
+<div class="img-frame">
+<img alt="Eclipse Partial Phase Montage" src="bin/Eclipse_0094Montage.jpg"/>
+</div>
+<p class="caption" style="margin-top: 10px; margin-bottom: 0;">
+<strong>Montage:</strong> Compilation of partial phases captured at 1/500s using neutral density filters.
+          </p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- ── FOOTER ── -->
+<footer class="site-footer">
+<div class="footer-inner">
+<div>
+<a class="footer-brand-logo" href="index.html">
+<img alt="Solar Cycle Science" src="bin/BlueSun_small.jpg"/>
+<span>Solar<em>Cycle</em>Science</span>
+</a>
+<p class="footer-tagline">
+        Exploring the dynamic Sun — solar cycles, magnetic fields, surface flows,
+        and forecasts. Maintained by solar physicists Dr. Lisa Upton, Dr. David Hathaway, and Dr. Bibhuti Kumar Jha.
+      </p>
+<p class="footer-support">
+        Supported by grants from NASA and NSF, including a NASA grant to support the
+        <a href="https://COFFIES.stanford.edu" rel="noopener noreferrer" target="_blank">COFFIES DRIVE Center</a>.
+      </p>
+</div>
+<div class="footer-col">
+<h5>Learn</h5>
+<ul>
+<li><a href="basics.html">The Basics</a></li>
+<li><a href="solarcycle.html">Solar Cycles</a></li>
+<li><a href="activeregions.html">Active Regions</a></li>
+<li><a href="polarfields.html">Polar Fields</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h5>Research</h5>
+<ul>
+<li><a href="flows.html">Surface Flows</a></li>
+<li><a href="giantcells.html">Giant Cell Maps</a></li>
+<li><a href="aft.html">Advective Flux Transport</a></li>
+<li><a href="baseline.html">Baseline Maps</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h5>More</h5>
+<ul>
+<li><a href="forecasts.html">Predictions</a></li>
+<li><a href="media.html">Media</a></li>
+<li><a href="people.html">People</a></li>
+<li><a href="more.html">More Info</a></li>
+<li><a href="https://COFFIES.stanford.edu" rel="noopener noreferrer" target="_blank">COFFIES Center ↗</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">
+<span>&emsp;© SolarCycleScience.com 2026</span>
+</div>
+</footer>
+<!-- ── JAVASCRIPT ── -->
+<script>
+(function () {
+  'use strict';
+  /* active link */
+  const path = window.location.pathname.replace(/\/$/, '') || '/index.html';
+  document.querySelectorAll('.nav-links a, .mobile-nav-item').forEach(link => {
+    const href = (link.getAttribute('href') || '').replace(/\/$/, '');
+    if (path.endsWith(href) || (path === '/' && href === '/index.html')) {
+      link.classList.add('active');
+    }
+  });
+  /* Hamburger */
+  const burger = document.getElementById('nav-hamburger');
+  const mobileNav = document.getElementById('nav-mobile');
+  if (burger && mobileNav) {
+    burger.addEventListener('click', () => {
+      const open = burger.classList.toggle('open');
+      mobileNav.classList.toggle('open', open);
+      burger.setAttribute('aria-expanded', String(open));
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+    mobileNav.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        burger.classList.remove('open');
+        mobileNav.classList.remove('open');
+        burger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+  }
+  /* Dropdowns */
+  document.querySelectorAll('.nav-dropdown').forEach(dd => {
+    const toggle = dd.querySelector('.nav-dropdown-toggle');
+    if (!toggle) return;
+    toggle.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const open = dd.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', String(open));
+      }
+      if (e.key === 'Escape') {
+        dd.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.focus();
+      }
+    });
+    document.addEventListener('click', e => {
+      if (!dd.contains(e.target)) {
+        dd.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+  /* Scroll reveal */
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal, .reveal-group').forEach(el => obs.observe(el));
+  /* Nav border on scroll */
+  const nav = document.querySelector('.site-nav');
+  if (nav) {
+    window.addEventListener('scroll', () => {
+      nav.style.borderBottomColor = window.scrollY > 10
+        ? 'rgba(255,154,31,0.28)' : 'rgba(255,154,31,0.14)';
+    }, { passive: true });
+  }
+})();
+</script>
+</body>
+</html>
